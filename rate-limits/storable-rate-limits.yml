@@ -1,0 +1,58 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Storable
+providerId: storable
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Self Storage
+- Property Management
+- storEDGE
+- Rate Limiting
+- Pagination
+description: >-
+  Storable's public storEDGE v1 API reference does not publish a numeric
+  per-minute or per-day request-rate limit. It does document collection-level
+  pagination: any endpoint returning a collection accepts page and per_page
+  query parameters, and responses are limited to 100 items by default unless
+  per_page is set. Every response body carries a meta hash with status_code,
+  status_message, error_code, and request_id, which is the mechanism for
+  surfacing throttling or authorization errors rather than a documented
+  numeric quota. No rate-limit information is published for SiteLink's legacy
+  SOAP API, whose reference document itself sits behind an NDA.
+notes: >-
+  Verify current throttling behavior (if any) directly with Storable/storEDGE
+  integration support, since no numeric limit is stated in the public v1
+  reference as of the review date.
+sources:
+- https://api.storedgefms.com/docs/v1.html
+responseCodes:
+  throttled: 429
+limits:
+- name: Collection Page Size
+  scope: request
+  metric: items
+  limit: '100 default, configurable via per_page'
+  notes: Applies to any storEDGE endpoint that returns a collection (tenants, units, leads, ledgers, etc.).
+- name: API Request Rate
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the storEDGE v1 API.
+- name: SiteLink Legacy API
+  scope: account
+  metric: requests
+  limit: not published
+  notes: SiteLink's SOAP API reference is NDA-gated; no public rate-limit information exists.
+policies:
+- name: Facility Scoping
+  description: Every storEDGE request is scoped to a single facility_id (or company_id at the corporate level) baked into the URL path, which is the primary access boundary rather than a throttling mechanism.
+- name: Required Headers
+  description: Storable's docs "highly recommend" sending Content-Type and Accept headers set to application/json on every call, noting some calls may not succeed without them.
+- name: Backoff Recommendation
+  description: As with most REST APIs, clients should implement retry with backoff on 5xx and any throttling responses, honoring Retry-After if present, though Storable does not explicitly document this header.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

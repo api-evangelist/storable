@@ -1,0 +1,98 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Storable
+providerId: storable
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Self Storage
+- Property Management
+- storEDGE
+- SiteLink
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Storable spend. Storable's cost surface is the underlying
+  storEDGE or SiteLink software subscription (per-facility, per-feature,
+  billed monthly) rather than a separate API meter - once a facility
+  subscribes, its storEDGE REST API access (or SiteLink's NDA-gated SOAP API)
+  is included. The real cost drivers are facility count, unit count, and which
+  feature modules (payments, insurance, gate access, business intelligence,
+  eSign) are enabled per facility, plus payment-processing fees on tenant
+  transactions run through Storable's payments stack.
+notes: >-
+  No public per-call or per-request API billing model exists to reconcile.
+  Verify current subscription tiers, feature add-on pricing, and payment
+  processing rates directly with Storable sales.
+sources:
+- https://www.storable.com/products/edge/
+- https://www.storable.com/products/sitelink/
+- https://api.storedgefms.com/docs/v1.html
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Storable
+serviceCategory: Vertical SaaS - Property Management
+billingModel:
+  pricingCategory: Fixed (per-facility, per-feature subscription)
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+  - Adjustment
+focusColumns:
+  ServiceName: storEDGE / SiteLink
+  ServiceCategory: Vertical SaaS - Property Management
+  ProviderName: Storable
+  PublisherName: Storable
+  InvoiceIssuerName: Storable
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Fixed
+meters:
+- name: facility_subscription
+  description: Monthly per-facility, per-feature software subscription fee (storEDGE or SiteLink).
+  unit: facilities
+  aggregation: sum
+  dimensions:
+  - facility
+  - feature_module
+- name: payment_processing
+  description: Fees on tenant rent, fee, and retail payments processed through Storable Payments and surfaced via the ledgers/payments endpoints.
+  unit: transactions
+  aggregation: sum
+  dimensions:
+  - facility
+  - tenant
+- name: insurance_program_revenue_share
+  description: Revenue share or program fees tied to tenant protection/insurance enrollment surfaced via the insurance endpoints.
+  unit: enrollments
+  aggregation: sum
+  dimensions:
+  - facility
+- name: api_integration_effort
+  description: Internal engineering cost to build and maintain a storEDGE API integration or to obtain and maintain a SiteLink API NDA/license (no direct Storable invoice line, but a real cost).
+  unit: hours
+  aggregation: sum
+  dimensions:
+  - integration
+principles:
+- name: Visibility
+  description: Track per-facility subscription cost against enabled feature modules; reconcile payment-processing and insurance revenue-share fees against ledger and insurance endpoint activity.
+- name: Allocation
+  description: Attribute subscription and processing costs to the specific facility (facility_id) or company (company_id) they were incurred under, matching Storable's own API scoping.
+- name: Optimization
+  description: Right-size which feature modules are enabled per facility; consolidate multi-facility operators onto company-level reporting/report_requests endpoints instead of per-facility polling to reduce integration overhead.
+- name: Accountability
+  description: Assign an owner for the SiteLink NDA/API-license relationship (legal + engineering) separately from the storEDGE technical integration owner, since the two APIs have different authorization paths.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

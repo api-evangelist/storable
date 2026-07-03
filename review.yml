@@ -1,0 +1,128 @@
+aid: storable
+name: Storable
+review:
+  question: Does Storable expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-03'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Storable's storEDGE v1 API reference
+    documents a pure request/response REST surface over HTTPS with no
+    server-push transport (WebSocket or SSE) to model. Gate hardware and
+    third-party listing/marketing integrations receive updates either by
+    polling storEDGE endpoints or by the third party being POSTed to as a
+    configured recipient (e.g. gate activity logging is inbound POST from
+    hardware to Storable, not a Storable-initiated push to integrators), which
+    is not a documented public streaming contract worth modeling as AsyncAPI.
+findings:
+  summary: |
+    Storable does not publish a documented public WebSocket API on either of
+    its two API surfaces. Storable is a brand family (SiteLink, storEDGE,
+    SpareFoot) built through acquisition, and the two property-management
+    products expose two different, non-unified APIs:
+
+    1. storEDGE REST API (api.storedgefms.com) - a modern, genuinely publicly
+       documented REST API at https://api.storedgefms.com/docs/v1.html. Anyone
+       can read the full endpoint reference without an NDA; calling it requires
+       being a storEDGE customer and generating a facility-scoped API access
+       key/secret, used for one-legged OAuth 1.0 signing (no WebSocket, no SSE -
+       plain request/response HTTPS with JSON bodies and page/per_page
+       pagination).
+    2. SiteLink legacy API - an older SOAP-style API whose reference document
+       is a password-protected PDF at apidoc.sitelink.com, released only after
+       signing an NDA, plus a separate API license application at
+       apilicenseapplication.sitelink.com. No endpoint list is publicly
+       readable; SiteLink documents four access levels (API Aggregator,
+       API Regular/Transaction, API Full Reporting, API Insurance Reporting).
+
+    This entry models the storEDGE surface, since its endpoint reference is
+    genuinely public, and treats SiteLink as a gated legacy sibling rather than
+    fabricating its endpoint list.
+  brandFamily: |
+    Storable Inc. is the parent brand. storEDGE and SiteLink are both
+    property-management products it owns and continues to sell in parallel
+    (competing directly with each other in Storable's own product comparison
+    pages), and SpareFoot is Storable's storage-unit listing marketplace that
+    both products' partner integrations feed. Marketplace/technology partners
+    (call centers, gate vendors, insurance, listing sites like SpareFoot and
+    StorageTreasures) integrate against whichever of the two management-system
+    APIs a given facility runs.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.storedgefms.com/v1
+      documented: true
+      note: storEDGE v1 API. Publicly readable reference; one-legged OAuth 1.0 required to call.
+    - protocol: SOAP
+      scheme: https
+      documented: false
+      note: SiteLink legacy API. Reference document exists but is NDA-gated (password-protected PDF); not publicly readable.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented for either storEDGE or SiteLink as of the review date.
+  endpointsConfirmedRest:
+    - GET https://api.storedgefms.com/v1/{facility_id}/tenants
+    - GET https://api.storedgefms.com/v1/{facility_id}/tenants/{id}
+    - GET https://api.storedgefms.com/v1/{facility_id}/tenants/search
+    - GET https://api.storedgefms.com/v1/{facility_id}/units
+    - GET https://api.storedgefms.com/v1/{facility_id}/units/available
+    - PUT https://api.storedgefms.com/v1/{facility_id}/units/bulk_update
+    - GET https://api.storedgefms.com/v1/{facility_id}/unit_groups
+    - PUT https://api.storedgefms.com/v1/{facility_id}/unit_group_tier_rates/update
+    - GET https://api.storedgefms.com/v1/{facility_id}/ledgers
+    - POST https://api.storedgefms.com/v1/{facility_id}/ledgers/{ledger_id}/make_payment
+    - GET https://api.storedgefms.com/v1/{facility_id}/payment_intents
+    - GET https://api.storedgefms.com/v1/{facility_id}/leads/reservations
+    - POST https://api.storedgefms.com/v1/{facility_id}/leads
+    - POST https://api.storedgefms.com/v1/{facility_id}/move_ins/process_move_in
+    - POST https://api.storedgefms.com/v1/{facility_id}/move_outs/process_move_out
+    - POST https://api.storedgefms.com/v1/{facility_id}/gate_codes/open
+    - GET https://api.storedgefms.com/v1/{facility_id}/access_points
+    - GET https://api.storedgefms.com/v1/{facility_id}/insurance/summary
+    - GET https://api.storedgefms.com/v1/{facility_id}/tasks
+    - GET https://api.storedgefms.com/v1/{facility_id}/events/{event_id}/documents
+    - POST https://api.storedgefms.com/v1/{facility_id}/events/{event_id}/esign
+    - GET https://api.storedgefms.com/v1/{facility_id}/delinquency_events
+    - GET https://api.storedgefms.com/v1/{facility_id}/auctions/scheduled
+    - GET https://api.storedgefms.com/v1/companies/{company_id}/active_auctions
+    - POST https://api.storedgefms.com/v1/companies/{company_id}/report_requests
+    - GET https://api.storedgefms.com/v1/{facility_id}/report_requests/{id}/completed_json
+  endpointsModeled: false
+  endpointsModeledNote: |
+    The endpoint paths above and in apis.yml/openapi are confirmed from
+    Storable's own public v1 API reference page, not fabricated. What is
+    modeled (and explicitly not confirmed) is the field-level JSON schema for
+    request/response bodies in openapi/storable-openapi.yml, since the source
+    documentation page enumerates endpoints and parameters but was not
+    captured with full per-field response schemas during this review.
+sources:
+  - url: https://api.storedgefms.com/docs/v1.html
+    type: APIReference
+    note: Public storEDGE v1 endpoint reference - one-legged OAuth 1.0, JSON, page/per_page pagination, meta-hash error format. No WebSocket or webhook mechanism documented.
+  - url: https://www.sitelink.com/solutions/integrations-partners
+    type: Documentation
+    note: Describes SiteLink's API-integrated partner program and marketplace; no endpoint detail disclosed publicly.
+  - url: https://support.sitelink.com/hc/en-us/articles/30254231063319-How-to-create-a-corporate-API-user-account
+    type: Documentation
+    note: Confirms SiteLink API access levels (Aggregator, Regular, Full Reporting, Insurance Reporting) and NDA/license-application gating.
+  - url: https://www.storable.com/products/software-integrations/
+    type: Documentation
+    note: Storable-level integrations marketing page covering SiteLink, storEDGE, and SpareFoot partner categories.
+  - url: https://tray.ai/documentation/connectors/service/storedge
+    type: Documentation
+    note: Third-party iPaaS connector confirming storEDGE base URL, OAuth 1.0 credential model, and link to the official v1 doc.
+  - url: https://github.com/madurapa/sitelink-php
+    type: SourceCode
+    note: Community PHP wrapper referencing legacy SiteLink SOAP methods (GetFacilities, GetSiteInformation, GetUnits, GetUnitInformation) and confirming the apidoc.sitelink.com NDA gate.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists on either of Storable's two APIs, and
+    storEDGE (the surface modeled in this entry) is a pure request/response
+    REST API. No AsyncAPI document was created because there is no
+    server-push transport to model; SiteLink's parallel legacy API could not
+    be assessed for transport beyond "SOAP over HTTPS" since its reference is
+    NDA-gated.

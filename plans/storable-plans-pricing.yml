@@ -1,0 +1,108 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Storable
+providerId: storable
+created: '2026-07-03'
+modified: '2026-07-03'
+reconciled: false
+tags:
+- Self Storage
+- Property Management
+- SiteLink
+- storEDGE
+- Plans
+description: >-
+  Storable does not sell API access as a standalone metered product. Its
+  storEDGE and SiteLink property-management software is sold to self-storage
+  operators on a per-facility, per-feature subscription (third-party
+  comparison data cites a starting price around $50 per feature per month, with
+  total cost driven by facility count, unit count, and the feature/module mix
+  selected). The REST API (storEDGE) and the legacy SOAP API (SiteLink) are
+  included at no separate charge to a facility that is already a customer -
+  the constraint is not price but authorization: a facility generates its own
+  API access key/secret (storEDGE) or completes SiteLink's NDA-gated API
+  license application before a third party can call on that facility's behalf.
+notes: >-
+  No public per-call, per-request, or tiered API pricing page was found for
+  either storEDGE or SiteLink. Software subscription tiers and exact per-facility
+  rates are not published; verify current pricing directly with Storable sales.
+sources:
+- https://www.storable.com/products/edge/
+- https://www.storable.com/products/sitelink/
+- https://www.capterra.com/p/218435/storEDGE/pricing/
+- https://www.capterra.com/p/92752/SiteLink-Web-Edition/
+plans:
+- id: storable-storedge-subscription
+  name: storEDGE Software Subscription (API Included)
+  type: paid
+  description: >-
+    Per-facility, per-feature software subscription for storEDGE property
+    management. The REST API described in this entry is included for a
+    subscribed facility once the facility generates its own OAuth 1.0 API
+    access key/secret - there is no separate API fee.
+  entries:
+  - label: Per-Feature Subscription
+    name: storedge_subscription
+    type: flat
+    metric: facility
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: starting around $50/feature/month per third-party comparison data (verify with Storable)
+    userMultiplied: false
+  elements:
+  - name: storEDGE Property Management
+  - name: storEDGE REST API (api.storedgefms.com)
+  - name: Tenant Portal
+  - name: Business Intelligence Reporting
+- id: storable-sitelink-subscription
+  name: SiteLink Web Edition Subscription (Legacy API Gated)
+  type: paid
+  description: >-
+    Per-facility, per-feature subscription for SiteLink Web Edition. SiteLink's
+    legacy SOAP API is available to a subscribed facility only after an NDA is
+    signed for the password-protected API document and a separate API license
+    application is approved - this is an authorization gate, not a metered
+    price tier.
+  entries:
+  - label: Per-Feature Subscription
+    name: sitelink_subscription
+    type: flat
+    metric: facility
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: starting around $50/feature/month per third-party comparison data (verify with Storable)
+    userMultiplied: false
+  elements:
+  - name: SiteLink Web Edition Property Management
+  - name: SiteLink Legacy SOAP API (NDA + license application required)
+  - name: Marketplace/Partner Integrations
+- id: storable-enterprise
+  name: Enterprise / Multi-Facility
+  type: enterprise
+  description: >-
+    Custom agreements for multi-facility operators and REITs standardizing on
+    Storable across a portfolio, including corporate-level API access spanning
+    facilities via the company-scoped endpoints (e.g. /companies/{company_id}/...).
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Portfolio-Wide Company API Access
+  - name: Dedicated Support
+  - name: Custom Reporting
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

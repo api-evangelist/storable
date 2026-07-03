@@ -1,0 +1,1481 @@
+openapi: 3.0.3
+info:
+  title: Storable Edge (storEDGE) API
+  description: >-
+    A representative OpenAPI reference for the Storable Edge (storEDGE) REST
+    API, the modern property-management API in the Storable brand family
+    (SiteLink, storEDGE, SpareFoot). The endpoint paths, HTTP methods, and
+    parameter names below are taken from Storable's public v1 API reference at
+    https://api.storedgefms.com/docs/v1.html. That page enumerates roughly 150
+    endpoints across tenants, units, ledgers, leads, move-ins/outs, gate access,
+    insurance, tasks, documents/eSign, delinquency/auctions, and reporting; this
+    document models a representative subset of those confirmed paths per
+    resource area rather than every documented route. Response/request body
+    schemas below are reasonably modeled from the named resources (tenant,
+    unit, ledger, lead, etc.) since the source page documents endpoints and
+    parameters but was not captured with full field-by-field JSON schemas -
+    treat schema properties as illustrative, not a verbatim contract. All
+    calls are scoped to a facility (or company) by path parameter and
+    authenticated with one-legged OAuth 1.0 (API access key + secret issued to
+    a storEDGE customer, used as the OAuth consumer key/secret with no
+    additional handshake).
+  version: '1.0'
+  contact:
+    name: Storable
+    url: https://www.storable.com/products/edge/
+servers:
+  - url: https://api.storedgefms.com/v1
+    description: Storable Edge (storEDGE) production API, one-legged OAuth 1.0
+security:
+  - oauth1: []
+tags:
+  - name: Tenants
+    description: Tenant accounts, preferences, notes, and eligibility.
+  - name: Units & Rates
+    description: Unit inventory, unit groups/types, and tiered rate management.
+  - name: Ledgers & Payments
+    description: Tenant ledgers, payments, payment methods, invoices.
+  - name: Leads & Reservations
+    description: Lead pipeline - reservations, inquiries, waitlist.
+  - name: Move Ins & Outs
+    description: Rental move-in and move-out lifecycle.
+  - name: Gate Access
+    description: Gate codes, access points, and gate activity logging.
+  - name: Insurance
+    description: Tenant protection plan summary, activity, and enrollment settings.
+  - name: Tasks
+    description: Facility and unit-level operational task management.
+  - name: Documents & eSign
+    description: Lease/rental documents and electronic signature.
+  - name: Delinquency & Auctions
+    description: Delinquency event tracking and lien-unit auctions.
+  - name: Reporting
+    description: Asynchronous report requests at the facility and company level.
+paths:
+  /{facility_id}/tenants:
+    get:
+      operationId: listTenants
+      tags: [Tenants]
+      summary: List tenants
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/perPage'
+      responses:
+        '200':
+          description: A page of tenants.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  tenants:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tenant'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /{facility_id}/tenants/{id}:
+    get:
+      operationId: getTenant
+      tags: [Tenants]
+      summary: Get a tenant by ID
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The tenant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tenant'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateTenant
+      tags: [Tenants]
+      summary: Update a tenant
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TenantInput'
+      responses:
+        '200':
+          description: The updated tenant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tenant'
+  /{facility_id}/tenants/search:
+    get:
+      operationId: searchTenants
+      tags: [Tenants]
+      summary: Search tenants
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: q
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Matching tenants.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tenant'
+  /{facility_id}/tenants/{tenant_id}/preferences:
+    get:
+      operationId: getTenantPreferences
+      tags: [Tenants]
+      summary: Get tenant communication preferences
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - $ref: '#/components/parameters/tenantId'
+      responses:
+        '200':
+          description: Tenant preferences.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantPreferences'
+    put:
+      operationId: updateTenantPreferences
+      tags: [Tenants]
+      summary: Update tenant communication preferences
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - $ref: '#/components/parameters/tenantId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TenantPreferences'
+      responses:
+        '200':
+          description: Updated preferences.
+  /{facility_id}/tenants/{tenant_id}/notes:
+    post:
+      operationId: createTenantNote
+      tags: [Tenants]
+      summary: Add a note to a tenant
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - $ref: '#/components/parameters/tenantId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                note:
+                  type: string
+      responses:
+        '201':
+          description: Note created.
+  /{facility_id}/tenants/sign_in:
+    post:
+      operationId: tenantSignIn
+      tags: [Tenants]
+      summary: Authenticate a tenant against the tenant portal
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Sign-in result.
+  /{facility_id}/units:
+    get:
+      operationId: listUnits
+      tags: [Units & Rates]
+      summary: List units
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/perPage'
+      responses:
+        '200':
+          description: A page of units.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  units:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Unit'
+    post:
+      operationId: createUnit
+      tags: [Units & Rates]
+      summary: Create a unit
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnitInput'
+      responses:
+        '201':
+          description: Unit created.
+  /{facility_id}/units/available:
+    get:
+      operationId: listAvailableUnits
+      tags: [Units & Rates]
+      summary: List units available for rent
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Available units.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Unit'
+  /{facility_id}/units/bulk_create:
+    post:
+      operationId: bulkCreateUnits
+      tags: [Units & Rates]
+      summary: Bulk create units
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                units:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/UnitInput'
+      responses:
+        '201':
+          description: Units created.
+  /{facility_id}/units/bulk_update:
+    put:
+      operationId: bulkUpdateUnits
+      tags: [Units & Rates]
+      summary: Bulk update units
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                units:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/UnitInput'
+      responses:
+        '200':
+          description: Units updated.
+  /{facility_id}/units/rate_history:
+    get:
+      operationId: getUnitRateHistory
+      tags: [Units & Rates]
+      summary: Get historical unit rates
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Rate history entries.
+  /{facility_id}/units/{unit_id}/future_scheduled_rates:
+    get:
+      operationId: getFutureScheduledRates
+      tags: [Units & Rates]
+      summary: Get future scheduled rate changes for a unit
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: unit_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Scheduled rate changes.
+  /{facility_id}/unit_groups:
+    get:
+      operationId: listUnitGroups
+      tags: [Units & Rates]
+      summary: List unit groups
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Unit groups.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UnitGroup'
+    post:
+      operationId: createUnitGroup
+      tags: [Units & Rates]
+      summary: Create a unit group
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnitGroup'
+      responses:
+        '201':
+          description: Unit group created.
+  /{facility_id}/unit_group_tier_rates:
+    get:
+      operationId: listUnitGroupTierRates
+      tags: [Units & Rates]
+      summary: List tiered rates for unit groups
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Unit group tier rates.
+  /{facility_id}/unit_group_tier_rates/update:
+    put:
+      operationId: updateUnitGroupTierRates
+      tags: [Units & Rates]
+      summary: Update tiered rates for unit groups
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Tier rates updated.
+  /{facility_id}/discount_plans:
+    get:
+      operationId: listDiscountPlans
+      tags: [Units & Rates]
+      summary: List discount plans
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Discount plans.
+  /{facility_id}/ledgers:
+    get:
+      operationId: listLedgers
+      tags: [Ledgers & Payments]
+      summary: List tenant ledgers
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/perPage'
+      responses:
+        '200':
+          description: A page of ledgers.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  ledgers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Ledger'
+  /{facility_id}/ledgers/{id}:
+    get:
+      operationId: getLedger
+      tags: [Ledgers & Payments]
+      summary: Get a ledger by ID
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The ledger.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ledger'
+  /{facility_id}/ledgers/{ledger_id}/make_payment:
+    post:
+      operationId: makeLedgerPayment
+      tags: [Ledgers & Payments]
+      summary: Make a payment against a ledger
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: ledger_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentInput'
+      responses:
+        '200':
+          description: Payment result.
+  /{facility_id}/ledgers/{ledger_id}/update_autopay:
+    put:
+      operationId: updateLedgerAutopay
+      tags: [Ledgers & Payments]
+      summary: Enable, disable, or update autopay on a ledger
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: ledger_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                payment_method_id:
+                  type: string
+      responses:
+        '200':
+          description: Autopay updated.
+  /{facility_id}/tenants/{tenant_id}/payment_methods:
+    get:
+      operationId: listTenantPaymentMethods
+      tags: [Ledgers & Payments]
+      summary: List a tenant's stored payment methods
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - $ref: '#/components/parameters/tenantId'
+      responses:
+        '200':
+          description: Payment methods.
+    post:
+      operationId: createTenantPaymentMethod
+      tags: [Ledgers & Payments]
+      summary: Add a payment method for a tenant
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - $ref: '#/components/parameters/tenantId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentMethodInput'
+      responses:
+        '201':
+          description: Payment method created.
+  /{facility_id}/payment_intents:
+    get:
+      operationId: listPaymentIntents
+      tags: [Ledgers & Payments]
+      summary: List payment intents
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Payment intents.
+  /{facility_id}/invoices/{id}:
+    get:
+      operationId: getInvoice
+      tags: [Ledgers & Payments]
+      summary: Get an invoice by ID
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The invoice.
+  /{facility_id}/invoiceable_items:
+    get:
+      operationId: listInvoiceableItems
+      tags: [Ledgers & Payments]
+      summary: List invoiceable items (fees, retail, insurance, services)
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Invoiceable items.
+  /{facility_id}/authorize_funds:
+    post:
+      operationId: authorizeFunds
+      tags: [Ledgers & Payments]
+      summary: Authorize funds on a payment method (e.g. digital wallet)
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payment_method_id:
+                  type: string
+                amount:
+                  type: number
+      responses:
+        '200':
+          description: Authorization result.
+  /{facility_id}/leads:
+    get:
+      operationId: listLeads
+      tags: [Leads & Reservations]
+      summary: List leads
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/perPage'
+      responses:
+        '200':
+          description: A page of leads.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  leads:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Lead'
+    post:
+      operationId: createLead
+      tags: [Leads & Reservations]
+      summary: Create a lead (inquiry, reservation, or waitlist entry)
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeadInput'
+      responses:
+        '201':
+          description: Lead created.
+  /{facility_id}/leads/{id}:
+    patch:
+      operationId: updateLead
+      tags: [Leads & Reservations]
+      summary: Update a lead
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeadInput'
+      responses:
+        '200':
+          description: Lead updated.
+    delete:
+      operationId: deleteLead
+      tags: [Leads & Reservations]
+      summary: Delete a lead
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Lead deleted.
+  /{facility_id}/leads/reservations:
+    get:
+      operationId: listReservationLeads
+      tags: [Leads & Reservations]
+      summary: List leads in reservation status
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Reservation leads.
+  /{facility_id}/leads/waitlist:
+    get:
+      operationId: listWaitlistLeads
+      tags: [Leads & Reservations]
+      summary: List waitlisted leads
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Waitlisted leads.
+  /companies/{company_id}/leads:
+    get:
+      operationId: listCompanyLeads
+      tags: [Leads & Reservations]
+      summary: List leads across every facility in a company
+      parameters:
+        - $ref: '#/components/parameters/companyId'
+      responses:
+        '200':
+          description: Company-wide leads.
+  /{facility_id}/move_ins:
+    get:
+      operationId: listMoveIns
+      tags: [Move Ins & Outs]
+      summary: List move-ins
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Move-ins.
+  /{facility_id}/move_ins/review_cost:
+    post:
+      operationId: reviewMoveInCost
+      tags: [Move Ins & Outs]
+      summary: Preview the cost of a prospective move-in
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Cost preview.
+  /{facility_id}/move_ins/process_move_in:
+    post:
+      operationId: processMoveIn
+      tags: [Move Ins & Outs]
+      summary: Process a move-in
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MoveInInput'
+      responses:
+        '201':
+          description: Move-in processed.
+  /{facility_id}/move_outs:
+    get:
+      operationId: listMoveOuts
+      tags: [Move Ins & Outs]
+      summary: List move-outs
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Move-outs.
+  /{facility_id}/move_outs/reasons:
+    get:
+      operationId: listMoveOutReasons
+      tags: [Move Ins & Outs]
+      summary: List move-out reason codes
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Move-out reasons.
+  /{facility_id}/move_outs/schedule_move_out:
+    post:
+      operationId: scheduleMoveOut
+      tags: [Move Ins & Outs]
+      summary: Schedule a future move-out
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: Move-out scheduled.
+  /{facility_id}/move_outs/process_move_out:
+    post:
+      operationId: processMoveOut
+      tags: [Move Ins & Outs]
+      summary: Process a move-out
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Move-out processed.
+  /{facility_id}/gate_codes/availability_check:
+    post:
+      operationId: checkGateCodeAvailability
+      tags: [Gate Access]
+      summary: Check whether a gate code is available for use
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+      responses:
+        '200':
+          description: Availability result.
+  /{facility_id}/gate_codes/open:
+    post:
+      operationId: openGate
+      tags: [Gate Access]
+      summary: Open a gate remotely
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                access_point_id:
+                  type: string
+      responses:
+        '200':
+          description: Gate open result.
+  /{facility_id}/access_points:
+    get:
+      operationId: listAccessPoints
+      tags: [Gate Access]
+      summary: List a facility's gate access points
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Access points.
+  /{facility_id}/gate_activities:
+    post:
+      operationId: logGateActivity
+      tags: [Gate Access]
+      summary: Log a gate activity event from access hardware
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: Gate activity logged.
+  /{facility_id}/insurance/summary:
+    get:
+      operationId: getInsuranceSummary
+      tags: [Insurance]
+      summary: Get facility-level tenant protection/insurance summary
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Insurance summary.
+  /{facility_id}/insurance/activity:
+    get:
+      operationId: getInsuranceActivity
+      tags: [Insurance]
+      summary: Get facility-level insurance enrollment activity
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Insurance activity.
+  /{facility_id}/insurance/tenant_auto_enroll_settings:
+    put:
+      operationId: updateTenantAutoEnrollSettings
+      tags: [Insurance]
+      summary: Update tenant insurance auto-enrollment settings
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Settings updated.
+  /{facility_id}/tasks:
+    get:
+      operationId: listTasks
+      tags: [Tasks]
+      summary: List facility-level tasks
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Tasks.
+    post:
+      operationId: createTask
+      tags: [Tasks]
+      summary: Create a facility-level task
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        '201':
+          description: Task created.
+  /{facility_id}/tasks/{id}/complete:
+    put:
+      operationId: completeTask
+      tags: [Tasks]
+      summary: Mark a task complete
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Task marked complete.
+  /{facility_id}/units/{unit_id}/tasks:
+    get:
+      operationId: listUnitTasks
+      tags: [Tasks]
+      summary: List tasks scoped to a unit
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: unit_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Unit tasks.
+    post:
+      operationId: createUnitTask
+      tags: [Tasks]
+      summary: Create a task scoped to a unit
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: unit_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        '201':
+          description: Unit task created.
+  /{facility_id}/documents/{id}:
+    get:
+      operationId: getDocument
+      tags: [Documents & eSign]
+      summary: Get a document (e.g. lease PDF) by ID
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The document.
+  /{facility_id}/events/{event_id}/documents:
+    get:
+      operationId: listEventDocuments
+      tags: [Documents & eSign]
+      summary: List documents associated with a rental event
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Event documents.
+  /{facility_id}/documents/{event_id}/send_esignable_documents:
+    post:
+      operationId: sendEsignableDocuments
+      tags: [Documents & eSign]
+      summary: Send esignable documents to a tenant for a rental event
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Documents sent.
+  /{facility_id}/events/{event_id}/esign:
+    post:
+      operationId: esignEvent
+      tags: [Documents & eSign]
+      summary: Complete eSignature for a rental event
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: event_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: eSignature completed.
+  /{facility_id}/delinquency_events:
+    get:
+      operationId: listDelinquencyEvents
+      tags: [Delinquency & Auctions]
+      summary: List delinquency events
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Delinquency events.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DelinquencyEvent'
+  /{facility_id}/delinquency_events/{id}:
+    get:
+      operationId: getDelinquencyEvent
+      tags: [Delinquency & Auctions]
+      summary: Get a delinquency event by ID
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The delinquency event.
+  /{facility_id}/delinquency_events/{id}/{verb}:
+    patch:
+      operationId: transitionDelinquencyEvent
+      tags: [Delinquency & Auctions]
+      summary: Apply a state-transition verb to a delinquency event
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: verb
+          in: path
+          required: true
+          description: Action verb, e.g. waive, escalate, resolve.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Event transitioned.
+  /{facility_id}/auctions/scheduled:
+    get:
+      operationId: listScheduledAuctions
+      tags: [Delinquency & Auctions]
+      summary: List scheduled lien-unit auctions for a facility
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Scheduled auctions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Auction'
+  /companies/{company_id}/active_auctions:
+    get:
+      operationId: listActiveCompanyAuctions
+      tags: [Delinquency & Auctions]
+      summary: List active auctions across every facility in a company
+      parameters:
+        - $ref: '#/components/parameters/companyId'
+      responses:
+        '200':
+          description: Active auctions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Auction'
+  /{facility_id}/report_requests:
+    post:
+      operationId: createFacilityReportRequest
+      tags: [Reporting]
+      summary: Request a facility-level report bundle
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportRequestInput'
+      responses:
+        '202':
+          description: Report request accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportRequest'
+  /{facility_id}/report_requests/{id}:
+    get:
+      operationId: getFacilityReportRequest
+      tags: [Reporting]
+      summary: Get the status of a facility-level report request
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Report request status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportRequest'
+  /{facility_id}/report_requests/{id}/completed_json:
+    get:
+      operationId: getFacilityReportRequestResult
+      tags: [Reporting]
+      summary: Get the completed JSON result of a facility-level report request
+      parameters:
+        - $ref: '#/components/parameters/facilityId'
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Completed report data.
+  /companies/{company_id}/report_requests:
+    post:
+      operationId: createCompanyReportRequest
+      tags: [Reporting]
+      summary: Request a company-level report bundle across facilities
+      parameters:
+        - $ref: '#/components/parameters/companyId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportRequestInput'
+      responses:
+        '202':
+          description: Report request accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportRequest'
+components:
+  securitySchemes:
+    oauth1:
+      type: http
+      scheme: oauth1
+      description: >-
+        Non-standard OpenAPI representation of storEDGE's actual scheme:
+        one-legged OAuth 1.0. The API access key issued to a storEDGE customer
+        is used as the OAuth consumer key and the API secret key as the
+        consumer secret, signing each request; there is no three-legged
+        redirect/token exchange.
+  parameters:
+    facilityId:
+      name: facility_id
+      in: path
+      required: true
+      description: The storEDGE facility ID the request is scoped to.
+      schema:
+        type: string
+    companyId:
+      name: company_id
+      in: path
+      required: true
+      description: The storEDGE company (multi-facility account) ID.
+      schema:
+        type: string
+    tenantId:
+      name: tenant_id
+      in: path
+      required: true
+      schema:
+        type: string
+    page:
+      name: page
+      in: query
+      description: Page number for paginated collection endpoints.
+      schema:
+        type: integer
+        default: 1
+    perPage:
+      name: per_page
+      in: query
+      description: Items per page for paginated collection endpoints (default 100).
+      schema:
+        type: integer
+        default: 100
+  responses:
+    Unauthorized:
+      description: Missing or invalid OAuth 1.0 signature/credentials.
+    NotFound:
+      description: Resource not found.
+  schemas:
+    Meta:
+      type: object
+      description: >-
+        Every storEDGE response body includes a meta hash with request
+        parameters, method, pagination, and status/error details.
+      properties:
+        status_code:
+          type: integer
+        status_message:
+          type: string
+        error_code:
+          type: integer
+          nullable: true
+        request_id:
+          type: string
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_count:
+          type: integer
+    Tenant:
+      type: object
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        status:
+          type: string
+          enum: [current, previous]
+        facility_id:
+          type: string
+    TenantInput:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+    TenantPreferences:
+      type: object
+      properties:
+        email_opt_in:
+          type: boolean
+        sms_opt_in:
+          type: boolean
+        autopay_reminders:
+          type: boolean
+    Unit:
+      type: object
+      properties:
+        id:
+          type: string
+        unit_number:
+          type: string
+        unit_group_id:
+          type: string
+        unit_type_id:
+          type: string
+        width:
+          type: number
+        length:
+          type: number
+        standard_rate:
+          type: number
+        web_rate:
+          type: number
+        status:
+          type: string
+          enum: [available, rented, unrentable]
+    UnitInput:
+      type: object
+      properties:
+        unit_number:
+          type: string
+        unit_group_id:
+          type: string
+        unit_type_id:
+          type: string
+        width:
+          type: number
+        length:
+          type: number
+        standard_rate:
+          type: number
+    UnitGroup:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        max_rate:
+          type: number
+    Ledger:
+      type: object
+      properties:
+        id:
+          type: string
+        tenant_id:
+          type: string
+        unit_id:
+          type: string
+        balance:
+          type: number
+        next_due_date:
+          type: string
+          format: date
+        autopay_enabled:
+          type: boolean
+        delinquent:
+          type: boolean
+    PaymentInput:
+      type: object
+      properties:
+        payment_method_id:
+          type: string
+        amount:
+          type: number
+    PaymentMethodInput:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [credit_card, ach, digital_wallet]
+        token:
+          type: string
+    Lead:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum: [inquiry, reservation, waitlist, missed_move_in, current]
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        unit_group_id:
+          type: string
+        source:
+          type: string
+    LeadInput:
+      type: object
+      properties:
+        status:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        unit_group_id:
+          type: string
+        source:
+          type: string
+    MoveInInput:
+      type: object
+      properties:
+        lead_id:
+          type: string
+        unit_id:
+          type: string
+        move_in_date:
+          type: string
+          format: date
+        payment_method_id:
+          type: string
+    TaskInput:
+      type: object
+      properties:
+        category:
+          type: string
+        description:
+          type: string
+        due_date:
+          type: string
+          format: date
+    DelinquencyEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        ledger_id:
+          type: string
+        tenant_id:
+          type: string
+        stage:
+          type: string
+        days_delinquent:
+          type: integer
+        balance:
+          type: number
+    Auction:
+      type: object
+      properties:
+        id:
+          type: string
+        unit_id:
+          type: string
+        facility_id:
+          type: string
+        scheduled_date:
+          type: string
+          format: date
+        status:
+          type: string
+          enum: [scheduled, active, completed, canceled]
+    ReportRequestInput:
+      type: object
+      properties:
+        report_type:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+    ReportRequest:
+      type: object
+      properties:
+        id:
+          type: string
+        report_type:
+          type: string
+        status:
+          type: string
+          enum: [pending, processing, completed, failed]
+        created_at:
+          type: string
+          format: date-time
