@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/storable-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: oauth1
+  type: http
+  scheme: oauth1
+  description: 'Non-standard OpenAPI representation of storEDGE''s actual scheme: one-legged
+    OAuth 1.0. The API access key issued to a storEDGE customer is used as the OAuth consumer
+    key and the API secret key as the consumer secret, signing each request; there is no three-legged
+    redirect/token exchange.'
+  sources:
+  - openapi/storable-openapi.yml

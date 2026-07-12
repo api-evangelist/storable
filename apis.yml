@@ -237,6 +237,10 @@ apis:
     include POST /v1/companies/:company_id/report_requests and
     GET /v1/:facility_id/report_requests/:id/completed_json.
 common:
+- type: DomainSecurity
+  url: security/storable-domain-security.yml
+- type: Authentication
+  url: authentication/storable-authentication.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/storableinc
 - type: Website
@@ -249,6 +253,8 @@ common:
   url: rate-limits/storable-rate-limits.yml
 - type: FinOps
   url: finops/storable-finops.yml
+- url: https://www.storable.com/blog/
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
