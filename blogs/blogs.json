@@ -1,0 +1,14 @@
+{
+  "repo": "storable",
+  "feeds": [
+    {
+      "source": "https://www.storable.com/blog/",
+      "feed_url": "https://www.storable.com/feed/",
+      "title": "",
+      "saved": 1,
+      "method": "discovered"
+    }
+  ],
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 7
+}
