@@ -237,6 +237,8 @@ apis:
     include POST /v1/companies/:company_id/report_requests and
     GET /v1/:facility_id/report_requests/:id/completed_json.
 common:
+- type: AgenticAccess
+  url: agentic-access/storable-agentic-access.yml
 - type: DomainSecurity
   url: security/storable-domain-security.yml
 - type: Authentication
