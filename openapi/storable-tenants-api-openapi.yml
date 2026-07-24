@@ -1,0 +1,286 @@
+openapi: 3.0.3
+info:
+  title: Storable Edge (storEDGE) Delinquency & Auctions Tenants API
+  description: A representative OpenAPI reference for the Storable Edge (storEDGE) REST API, the modern property-management API in the Storable brand family (SiteLink, storEDGE, SpareFoot). The endpoint paths, HTTP methods, and parameter names below are taken from Storable's public v1 API reference at https://api.storedgefms.com/docs/v1.html. That page enumerates roughly 150 endpoints across tenants, units, ledgers, leads, move-ins/outs, gate access, insurance, tasks, documents/eSign, delinquency/auctions, and reporting; this document models a representative subset of those confirmed paths per resource area rather than every documented route. Response/request body schemas below are reasonably modeled from the named resources (tenant, unit, ledger, lead, etc.) since the source page documents endpoints and parameters but was not captured with full field-by-field JSON schemas - treat schema properties as illustrative, not a verbatim contract. All calls are scoped to a facility (or company) by path parameter and authenticated with one-legged OAuth 1.0 (API access key + secret issued to a storEDGE customer, used as the OAuth consumer key/secret with no additional handshake).
+  version: '1.0'
+  contact:
+    name: Storable
+    url: https://www.storable.com/products/edge/
+servers:
+- url: https://api.storedgefms.com/v1
+  description: Storable Edge (storEDGE) production API, one-legged OAuth 1.0
+security:
+- oauth1: []
+tags:
+- name: Tenants
+  description: Tenant accounts, preferences, notes, and eligibility.
+paths:
+  /{facility_id}/tenants:
+    get:
+      operationId: listTenants
+      tags:
+      - Tenants
+      summary: List tenants
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/perPage'
+      responses:
+        '200':
+          description: A page of tenants.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  tenants:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tenant'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /{facility_id}/tenants/{id}:
+    get:
+      operationId: getTenant
+      tags:
+      - Tenants
+      summary: Get a tenant by ID
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The tenant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tenant'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    patch:
+      operationId: updateTenant
+      tags:
+      - Tenants
+      summary: Update a tenant
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TenantInput'
+      responses:
+        '200':
+          description: The updated tenant.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tenant'
+  /{facility_id}/tenants/search:
+    get:
+      operationId: searchTenants
+      tags:
+      - Tenants
+      summary: Search tenants
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - name: q
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Matching tenants.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Tenant'
+  /{facility_id}/tenants/{tenant_id}/preferences:
+    get:
+      operationId: getTenantPreferences
+      tags:
+      - Tenants
+      summary: Get tenant communication preferences
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - $ref: '#/components/parameters/tenantId'
+      responses:
+        '200':
+          description: Tenant preferences.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TenantPreferences'
+    put:
+      operationId: updateTenantPreferences
+      tags:
+      - Tenants
+      summary: Update tenant communication preferences
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - $ref: '#/components/parameters/tenantId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TenantPreferences'
+      responses:
+        '200':
+          description: Updated preferences.
+  /{facility_id}/tenants/{tenant_id}/notes:
+    post:
+      operationId: createTenantNote
+      tags:
+      - Tenants
+      summary: Add a note to a tenant
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - $ref: '#/components/parameters/tenantId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                note:
+                  type: string
+      responses:
+        '201':
+          description: Note created.
+  /{facility_id}/tenants/sign_in:
+    post:
+      operationId: tenantSignIn
+      tags:
+      - Tenants
+      summary: Authenticate a tenant against the tenant portal
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Sign-in result.
+components:
+  parameters:
+    perPage:
+      name: per_page
+      in: query
+      description: Items per page for paginated collection endpoints (default 100).
+      schema:
+        type: integer
+        default: 100
+    tenantId:
+      name: tenant_id
+      in: path
+      required: true
+      schema:
+        type: string
+    page:
+      name: page
+      in: query
+      description: Page number for paginated collection endpoints.
+      schema:
+        type: integer
+        default: 1
+    facilityId:
+      name: facility_id
+      in: path
+      required: true
+      description: The storEDGE facility ID the request is scoped to.
+      schema:
+        type: string
+  schemas:
+    Tenant:
+      type: object
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        status:
+          type: string
+          enum:
+          - current
+          - previous
+        facility_id:
+          type: string
+    TenantInput:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+    Meta:
+      type: object
+      description: Every storEDGE response body includes a meta hash with request parameters, method, pagination, and status/error details.
+      properties:
+        status_code:
+          type: integer
+        status_message:
+          type: string
+        error_code:
+          type: integer
+          nullable: true
+        request_id:
+          type: string
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_count:
+          type: integer
+    TenantPreferences:
+      type: object
+      properties:
+        email_opt_in:
+          type: boolean
+        sms_opt_in:
+          type: boolean
+        autopay_reminders:
+          type: boolean
+  responses:
+    Unauthorized:
+      description: Missing or invalid OAuth 1.0 signature/credentials.
+    NotFound:
+      description: Resource not found.
+  securitySchemes:
+    oauth1:
+      type: http
+      scheme: oauth1
+      description: 'Non-standard OpenAPI representation of storEDGE''s actual scheme: one-legged OAuth 1.0. The API access key issued to a storEDGE customer is used as the OAuth consumer key and the API secret key as the consumer secret, signing each request; there is no three-legged redirect/token exchange.'

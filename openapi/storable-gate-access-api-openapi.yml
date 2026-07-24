@@ -1,0 +1,99 @@
+openapi: 3.0.3
+info:
+  title: Storable Edge (storEDGE) Delinquency & Auctions Gate Access API
+  description: A representative OpenAPI reference for the Storable Edge (storEDGE) REST API, the modern property-management API in the Storable brand family (SiteLink, storEDGE, SpareFoot). The endpoint paths, HTTP methods, and parameter names below are taken from Storable's public v1 API reference at https://api.storedgefms.com/docs/v1.html. That page enumerates roughly 150 endpoints across tenants, units, ledgers, leads, move-ins/outs, gate access, insurance, tasks, documents/eSign, delinquency/auctions, and reporting; this document models a representative subset of those confirmed paths per resource area rather than every documented route. Response/request body schemas below are reasonably modeled from the named resources (tenant, unit, ledger, lead, etc.) since the source page documents endpoints and parameters but was not captured with full field-by-field JSON schemas - treat schema properties as illustrative, not a verbatim contract. All calls are scoped to a facility (or company) by path parameter and authenticated with one-legged OAuth 1.0 (API access key + secret issued to a storEDGE customer, used as the OAuth consumer key/secret with no additional handshake).
+  version: '1.0'
+  contact:
+    name: Storable
+    url: https://www.storable.com/products/edge/
+servers:
+- url: https://api.storedgefms.com/v1
+  description: Storable Edge (storEDGE) production API, one-legged OAuth 1.0
+security:
+- oauth1: []
+tags:
+- name: Gate Access
+  description: Gate codes, access points, and gate activity logging.
+paths:
+  /{facility_id}/gate_codes/availability_check:
+    post:
+      operationId: checkGateCodeAvailability
+      tags:
+      - Gate Access
+      summary: Check whether a gate code is available for use
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+      responses:
+        '200':
+          description: Availability result.
+  /{facility_id}/gate_codes/open:
+    post:
+      operationId: openGate
+      tags:
+      - Gate Access
+      summary: Open a gate remotely
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                access_point_id:
+                  type: string
+      responses:
+        '200':
+          description: Gate open result.
+  /{facility_id}/access_points:
+    get:
+      operationId: listAccessPoints
+      tags:
+      - Gate Access
+      summary: List a facility's gate access points
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Access points.
+  /{facility_id}/gate_activities:
+    post:
+      operationId: logGateActivity
+      tags:
+      - Gate Access
+      summary: Log a gate activity event from access hardware
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: Gate activity logged.
+components:
+  parameters:
+    facilityId:
+      name: facility_id
+      in: path
+      required: true
+      description: The storEDGE facility ID the request is scoped to.
+      schema:
+        type: string
+  securitySchemes:
+    oauth1:
+      type: http
+      scheme: oauth1
+      description: 'Non-standard OpenAPI representation of storEDGE''s actual scheme: one-legged OAuth 1.0. The API access key issued to a storEDGE customer is used as the OAuth consumer key and the API secret key as the consumer secret, signing each request; there is no three-legged redirect/token exchange.'

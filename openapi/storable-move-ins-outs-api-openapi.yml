@@ -1,0 +1,145 @@
+openapi: 3.0.3
+info:
+  title: Storable Edge (storEDGE) Delinquency & Auctions Move Ins & Outs API
+  description: A representative OpenAPI reference for the Storable Edge (storEDGE) REST API, the modern property-management API in the Storable brand family (SiteLink, storEDGE, SpareFoot). The endpoint paths, HTTP methods, and parameter names below are taken from Storable's public v1 API reference at https://api.storedgefms.com/docs/v1.html. That page enumerates roughly 150 endpoints across tenants, units, ledgers, leads, move-ins/outs, gate access, insurance, tasks, documents/eSign, delinquency/auctions, and reporting; this document models a representative subset of those confirmed paths per resource area rather than every documented route. Response/request body schemas below are reasonably modeled from the named resources (tenant, unit, ledger, lead, etc.) since the source page documents endpoints and parameters but was not captured with full field-by-field JSON schemas - treat schema properties as illustrative, not a verbatim contract. All calls are scoped to a facility (or company) by path parameter and authenticated with one-legged OAuth 1.0 (API access key + secret issued to a storEDGE customer, used as the OAuth consumer key/secret with no additional handshake).
+  version: '1.0'
+  contact:
+    name: Storable
+    url: https://www.storable.com/products/edge/
+servers:
+- url: https://api.storedgefms.com/v1
+  description: Storable Edge (storEDGE) production API, one-legged OAuth 1.0
+security:
+- oauth1: []
+tags:
+- name: Move Ins & Outs
+  description: Rental move-in and move-out lifecycle.
+paths:
+  /{facility_id}/move_ins:
+    get:
+      operationId: listMoveIns
+      tags:
+      - Move Ins & Outs
+      summary: List move-ins
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Move-ins.
+  /{facility_id}/move_ins/review_cost:
+    post:
+      operationId: reviewMoveInCost
+      tags:
+      - Move Ins & Outs
+      summary: Preview the cost of a prospective move-in
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Cost preview.
+  /{facility_id}/move_ins/process_move_in:
+    post:
+      operationId: processMoveIn
+      tags:
+      - Move Ins & Outs
+      summary: Process a move-in
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MoveInInput'
+      responses:
+        '201':
+          description: Move-in processed.
+  /{facility_id}/move_outs:
+    get:
+      operationId: listMoveOuts
+      tags:
+      - Move Ins & Outs
+      summary: List move-outs
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Move-outs.
+  /{facility_id}/move_outs/reasons:
+    get:
+      operationId: listMoveOutReasons
+      tags:
+      - Move Ins & Outs
+      summary: List move-out reason codes
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Move-out reasons.
+  /{facility_id}/move_outs/schedule_move_out:
+    post:
+      operationId: scheduleMoveOut
+      tags:
+      - Move Ins & Outs
+      summary: Schedule a future move-out
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '201':
+          description: Move-out scheduled.
+  /{facility_id}/move_outs/process_move_out:
+    post:
+      operationId: processMoveOut
+      tags:
+      - Move Ins & Outs
+      summary: Process a move-out
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Move-out processed.
+components:
+  schemas:
+    MoveInInput:
+      type: object
+      properties:
+        lead_id:
+          type: string
+        unit_id:
+          type: string
+        move_in_date:
+          type: string
+          format: date
+        payment_method_id:
+          type: string
+  parameters:
+    facilityId:
+      name: facility_id
+      in: path
+      required: true
+      description: The storEDGE facility ID the request is scoped to.
+      schema:
+        type: string
+  securitySchemes:
+    oauth1:
+      type: http
+      scheme: oauth1
+      description: 'Non-standard OpenAPI representation of storEDGE''s actual scheme: one-legged OAuth 1.0. The API access key issued to a storEDGE customer is used as the OAuth consumer key and the API secret key as the consumer secret, signing each request; there is no three-legged redirect/token exchange.'

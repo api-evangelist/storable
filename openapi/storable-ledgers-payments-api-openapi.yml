@@ -1,0 +1,289 @@
+openapi: 3.0.3
+info:
+  title: Storable Edge (storEDGE) Delinquency & Auctions Ledgers & Payments API
+  description: A representative OpenAPI reference for the Storable Edge (storEDGE) REST API, the modern property-management API in the Storable brand family (SiteLink, storEDGE, SpareFoot). The endpoint paths, HTTP methods, and parameter names below are taken from Storable's public v1 API reference at https://api.storedgefms.com/docs/v1.html. That page enumerates roughly 150 endpoints across tenants, units, ledgers, leads, move-ins/outs, gate access, insurance, tasks, documents/eSign, delinquency/auctions, and reporting; this document models a representative subset of those confirmed paths per resource area rather than every documented route. Response/request body schemas below are reasonably modeled from the named resources (tenant, unit, ledger, lead, etc.) since the source page documents endpoints and parameters but was not captured with full field-by-field JSON schemas - treat schema properties as illustrative, not a verbatim contract. All calls are scoped to a facility (or company) by path parameter and authenticated with one-legged OAuth 1.0 (API access key + secret issued to a storEDGE customer, used as the OAuth consumer key/secret with no additional handshake).
+  version: '1.0'
+  contact:
+    name: Storable
+    url: https://www.storable.com/products/edge/
+servers:
+- url: https://api.storedgefms.com/v1
+  description: Storable Edge (storEDGE) production API, one-legged OAuth 1.0
+security:
+- oauth1: []
+tags:
+- name: Ledgers & Payments
+  description: Tenant ledgers, payments, payment methods, invoices.
+paths:
+  /{facility_id}/ledgers:
+    get:
+      operationId: listLedgers
+      tags:
+      - Ledgers & Payments
+      summary: List tenant ledgers
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/perPage'
+      responses:
+        '200':
+          description: A page of ledgers.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  ledgers:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Ledger'
+  /{facility_id}/ledgers/{id}:
+    get:
+      operationId: getLedger
+      tags:
+      - Ledgers & Payments
+      summary: Get a ledger by ID
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The ledger.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ledger'
+  /{facility_id}/ledgers/{ledger_id}/make_payment:
+    post:
+      operationId: makeLedgerPayment
+      tags:
+      - Ledgers & Payments
+      summary: Make a payment against a ledger
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - name: ledger_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentInput'
+      responses:
+        '200':
+          description: Payment result.
+  /{facility_id}/ledgers/{ledger_id}/update_autopay:
+    put:
+      operationId: updateLedgerAutopay
+      tags:
+      - Ledgers & Payments
+      summary: Enable, disable, or update autopay on a ledger
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - name: ledger_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                enabled:
+                  type: boolean
+                payment_method_id:
+                  type: string
+      responses:
+        '200':
+          description: Autopay updated.
+  /{facility_id}/tenants/{tenant_id}/payment_methods:
+    get:
+      operationId: listTenantPaymentMethods
+      tags:
+      - Ledgers & Payments
+      summary: List a tenant's stored payment methods
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - $ref: '#/components/parameters/tenantId'
+      responses:
+        '200':
+          description: Payment methods.
+    post:
+      operationId: createTenantPaymentMethod
+      tags:
+      - Ledgers & Payments
+      summary: Add a payment method for a tenant
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - $ref: '#/components/parameters/tenantId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentMethodInput'
+      responses:
+        '201':
+          description: Payment method created.
+  /{facility_id}/payment_intents:
+    get:
+      operationId: listPaymentIntents
+      tags:
+      - Ledgers & Payments
+      summary: List payment intents
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Payment intents.
+  /{facility_id}/invoices/{id}:
+    get:
+      operationId: getInvoice
+      tags:
+      - Ledgers & Payments
+      summary: Get an invoice by ID
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The invoice.
+  /{facility_id}/invoiceable_items:
+    get:
+      operationId: listInvoiceableItems
+      tags:
+      - Ledgers & Payments
+      summary: List invoiceable items (fees, retail, insurance, services)
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Invoiceable items.
+  /{facility_id}/authorize_funds:
+    post:
+      operationId: authorizeFunds
+      tags:
+      - Ledgers & Payments
+      summary: Authorize funds on a payment method (e.g. digital wallet)
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payment_method_id:
+                  type: string
+                amount:
+                  type: number
+      responses:
+        '200':
+          description: Authorization result.
+components:
+  parameters:
+    perPage:
+      name: per_page
+      in: query
+      description: Items per page for paginated collection endpoints (default 100).
+      schema:
+        type: integer
+        default: 100
+    tenantId:
+      name: tenant_id
+      in: path
+      required: true
+      schema:
+        type: string
+    page:
+      name: page
+      in: query
+      description: Page number for paginated collection endpoints.
+      schema:
+        type: integer
+        default: 1
+    facilityId:
+      name: facility_id
+      in: path
+      required: true
+      description: The storEDGE facility ID the request is scoped to.
+      schema:
+        type: string
+  schemas:
+    PaymentMethodInput:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - credit_card
+          - ach
+          - digital_wallet
+        token:
+          type: string
+    Meta:
+      type: object
+      description: Every storEDGE response body includes a meta hash with request parameters, method, pagination, and status/error details.
+      properties:
+        status_code:
+          type: integer
+        status_message:
+          type: string
+        error_code:
+          type: integer
+          nullable: true
+        request_id:
+          type: string
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_count:
+          type: integer
+    Ledger:
+      type: object
+      properties:
+        id:
+          type: string
+        tenant_id:
+          type: string
+        unit_id:
+          type: string
+        balance:
+          type: number
+        next_due_date:
+          type: string
+          format: date
+        autopay_enabled:
+          type: boolean
+        delinquent:
+          type: boolean
+    PaymentInput:
+      type: object
+      properties:
+        payment_method_id:
+          type: string
+        amount:
+          type: number
+  securitySchemes:
+    oauth1:
+      type: http
+      scheme: oauth1
+      description: 'Non-standard OpenAPI representation of storEDGE''s actual scheme: one-legged OAuth 1.0. The API access key issued to a storEDGE customer is used as the OAuth consumer key and the API secret key as the consumer secret, signing each request; there is no three-legged redirect/token exchange.'

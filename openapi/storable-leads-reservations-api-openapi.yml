@@ -1,0 +1,224 @@
+openapi: 3.0.3
+info:
+  title: Storable Edge (storEDGE) Delinquency & Auctions Leads & Reservations API
+  description: A representative OpenAPI reference for the Storable Edge (storEDGE) REST API, the modern property-management API in the Storable brand family (SiteLink, storEDGE, SpareFoot). The endpoint paths, HTTP methods, and parameter names below are taken from Storable's public v1 API reference at https://api.storedgefms.com/docs/v1.html. That page enumerates roughly 150 endpoints across tenants, units, ledgers, leads, move-ins/outs, gate access, insurance, tasks, documents/eSign, delinquency/auctions, and reporting; this document models a representative subset of those confirmed paths per resource area rather than every documented route. Response/request body schemas below are reasonably modeled from the named resources (tenant, unit, ledger, lead, etc.) since the source page documents endpoints and parameters but was not captured with full field-by-field JSON schemas - treat schema properties as illustrative, not a verbatim contract. All calls are scoped to a facility (or company) by path parameter and authenticated with one-legged OAuth 1.0 (API access key + secret issued to a storEDGE customer, used as the OAuth consumer key/secret with no additional handshake).
+  version: '1.0'
+  contact:
+    name: Storable
+    url: https://www.storable.com/products/edge/
+servers:
+- url: https://api.storedgefms.com/v1
+  description: Storable Edge (storEDGE) production API, one-legged OAuth 1.0
+security:
+- oauth1: []
+tags:
+- name: Leads & Reservations
+  description: Lead pipeline - reservations, inquiries, waitlist.
+paths:
+  /{facility_id}/leads:
+    get:
+      operationId: listLeads
+      tags:
+      - Leads & Reservations
+      summary: List leads
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/perPage'
+      responses:
+        '200':
+          description: A page of leads.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  leads:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Lead'
+    post:
+      operationId: createLead
+      tags:
+      - Leads & Reservations
+      summary: Create a lead (inquiry, reservation, or waitlist entry)
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeadInput'
+      responses:
+        '201':
+          description: Lead created.
+  /{facility_id}/leads/{id}:
+    patch:
+      operationId: updateLead
+      tags:
+      - Leads & Reservations
+      summary: Update a lead
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeadInput'
+      responses:
+        '200':
+          description: Lead updated.
+    delete:
+      operationId: deleteLead
+      tags:
+      - Leads & Reservations
+      summary: Delete a lead
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Lead deleted.
+  /{facility_id}/leads/reservations:
+    get:
+      operationId: listReservationLeads
+      tags:
+      - Leads & Reservations
+      summary: List leads in reservation status
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Reservation leads.
+  /{facility_id}/leads/waitlist:
+    get:
+      operationId: listWaitlistLeads
+      tags:
+      - Leads & Reservations
+      summary: List waitlisted leads
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Waitlisted leads.
+  /companies/{company_id}/leads:
+    get:
+      operationId: listCompanyLeads
+      tags:
+      - Leads & Reservations
+      summary: List leads across every facility in a company
+      parameters:
+      - $ref: '#/components/parameters/companyId'
+      responses:
+        '200':
+          description: Company-wide leads.
+components:
+  parameters:
+    perPage:
+      name: per_page
+      in: query
+      description: Items per page for paginated collection endpoints (default 100).
+      schema:
+        type: integer
+        default: 100
+    companyId:
+      name: company_id
+      in: path
+      required: true
+      description: The storEDGE company (multi-facility account) ID.
+      schema:
+        type: string
+    page:
+      name: page
+      in: query
+      description: Page number for paginated collection endpoints.
+      schema:
+        type: integer
+        default: 1
+    facilityId:
+      name: facility_id
+      in: path
+      required: true
+      description: The storEDGE facility ID the request is scoped to.
+      schema:
+        type: string
+  schemas:
+    LeadInput:
+      type: object
+      properties:
+        status:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        unit_group_id:
+          type: string
+        source:
+          type: string
+    Lead:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum:
+          - inquiry
+          - reservation
+          - waitlist
+          - missed_move_in
+          - current
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        unit_group_id:
+          type: string
+        source:
+          type: string
+    Meta:
+      type: object
+      description: Every storEDGE response body includes a meta hash with request parameters, method, pagination, and status/error details.
+      properties:
+        status_code:
+          type: integer
+        status_message:
+          type: string
+        error_code:
+          type: integer
+          nullable: true
+        request_id:
+          type: string
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_count:
+          type: integer
+  securitySchemes:
+    oauth1:
+      type: http
+      scheme: oauth1
+      description: 'Non-standard OpenAPI representation of storEDGE''s actual scheme: one-legged OAuth 1.0. The API access key issued to a storEDGE customer is used as the OAuth consumer key and the API secret key as the consumer secret, signing each request; there is no three-legged redirect/token exchange.'

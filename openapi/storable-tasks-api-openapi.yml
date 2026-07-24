@@ -1,0 +1,122 @@
+openapi: 3.0.3
+info:
+  title: Storable Edge (storEDGE) Delinquency & Auctions Tasks API
+  description: A representative OpenAPI reference for the Storable Edge (storEDGE) REST API, the modern property-management API in the Storable brand family (SiteLink, storEDGE, SpareFoot). The endpoint paths, HTTP methods, and parameter names below are taken from Storable's public v1 API reference at https://api.storedgefms.com/docs/v1.html. That page enumerates roughly 150 endpoints across tenants, units, ledgers, leads, move-ins/outs, gate access, insurance, tasks, documents/eSign, delinquency/auctions, and reporting; this document models a representative subset of those confirmed paths per resource area rather than every documented route. Response/request body schemas below are reasonably modeled from the named resources (tenant, unit, ledger, lead, etc.) since the source page documents endpoints and parameters but was not captured with full field-by-field JSON schemas - treat schema properties as illustrative, not a verbatim contract. All calls are scoped to a facility (or company) by path parameter and authenticated with one-legged OAuth 1.0 (API access key + secret issued to a storEDGE customer, used as the OAuth consumer key/secret with no additional handshake).
+  version: '1.0'
+  contact:
+    name: Storable
+    url: https://www.storable.com/products/edge/
+servers:
+- url: https://api.storedgefms.com/v1
+  description: Storable Edge (storEDGE) production API, one-legged OAuth 1.0
+security:
+- oauth1: []
+tags:
+- name: Tasks
+  description: Facility and unit-level operational task management.
+paths:
+  /{facility_id}/tasks:
+    get:
+      operationId: listTasks
+      tags:
+      - Tasks
+      summary: List facility-level tasks
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Tasks.
+    post:
+      operationId: createTask
+      tags:
+      - Tasks
+      summary: Create a facility-level task
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        '201':
+          description: Task created.
+  /{facility_id}/tasks/{id}/complete:
+    put:
+      operationId: completeTask
+      tags:
+      - Tasks
+      summary: Mark a task complete
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Task marked complete.
+  /{facility_id}/units/{unit_id}/tasks:
+    get:
+      operationId: listUnitTasks
+      tags:
+      - Tasks
+      summary: List tasks scoped to a unit
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - name: unit_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Unit tasks.
+    post:
+      operationId: createUnitTask
+      tags:
+      - Tasks
+      summary: Create a task scoped to a unit
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - name: unit_id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskInput'
+      responses:
+        '201':
+          description: Unit task created.
+components:
+  schemas:
+    TaskInput:
+      type: object
+      properties:
+        category:
+          type: string
+        description:
+          type: string
+        due_date:
+          type: string
+          format: date
+  parameters:
+    facilityId:
+      name: facility_id
+      in: path
+      required: true
+      description: The storEDGE facility ID the request is scoped to.
+      schema:
+        type: string
+  securitySchemes:
+    oauth1:
+      type: http
+      scheme: oauth1
+      description: 'Non-standard OpenAPI representation of storEDGE''s actual scheme: one-legged OAuth 1.0. The API access key issued to a storEDGE customer is used as the OAuth consumer key and the API secret key as the consumer secret, signing each request; there is no three-legged redirect/token exchange.'

@@ -1,0 +1,314 @@
+openapi: 3.0.3
+info:
+  title: Storable Edge (storEDGE) Delinquency & Auctions Units & Rates API
+  description: A representative OpenAPI reference for the Storable Edge (storEDGE) REST API, the modern property-management API in the Storable brand family (SiteLink, storEDGE, SpareFoot). The endpoint paths, HTTP methods, and parameter names below are taken from Storable's public v1 API reference at https://api.storedgefms.com/docs/v1.html. That page enumerates roughly 150 endpoints across tenants, units, ledgers, leads, move-ins/outs, gate access, insurance, tasks, documents/eSign, delinquency/auctions, and reporting; this document models a representative subset of those confirmed paths per resource area rather than every documented route. Response/request body schemas below are reasonably modeled from the named resources (tenant, unit, ledger, lead, etc.) since the source page documents endpoints and parameters but was not captured with full field-by-field JSON schemas - treat schema properties as illustrative, not a verbatim contract. All calls are scoped to a facility (or company) by path parameter and authenticated with one-legged OAuth 1.0 (API access key + secret issued to a storEDGE customer, used as the OAuth consumer key/secret with no additional handshake).
+  version: '1.0'
+  contact:
+    name: Storable
+    url: https://www.storable.com/products/edge/
+servers:
+- url: https://api.storedgefms.com/v1
+  description: Storable Edge (storEDGE) production API, one-legged OAuth 1.0
+security:
+- oauth1: []
+tags:
+- name: Units & Rates
+  description: Unit inventory, unit groups/types, and tiered rate management.
+paths:
+  /{facility_id}/units:
+    get:
+      operationId: listUnits
+      tags:
+      - Units & Rates
+      summary: List units
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/perPage'
+      responses:
+        '200':
+          description: A page of units.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  meta:
+                    $ref: '#/components/schemas/Meta'
+                  units:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Unit'
+    post:
+      operationId: createUnit
+      tags:
+      - Units & Rates
+      summary: Create a unit
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnitInput'
+      responses:
+        '201':
+          description: Unit created.
+  /{facility_id}/units/available:
+    get:
+      operationId: listAvailableUnits
+      tags:
+      - Units & Rates
+      summary: List units available for rent
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Available units.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Unit'
+  /{facility_id}/units/bulk_create:
+    post:
+      operationId: bulkCreateUnits
+      tags:
+      - Units & Rates
+      summary: Bulk create units
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                units:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/UnitInput'
+      responses:
+        '201':
+          description: Units created.
+  /{facility_id}/units/bulk_update:
+    put:
+      operationId: bulkUpdateUnits
+      tags:
+      - Units & Rates
+      summary: Bulk update units
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                units:
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/UnitInput'
+      responses:
+        '200':
+          description: Units updated.
+  /{facility_id}/units/rate_history:
+    get:
+      operationId: getUnitRateHistory
+      tags:
+      - Units & Rates
+      summary: Get historical unit rates
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Rate history entries.
+  /{facility_id}/units/{unit_id}/future_scheduled_rates:
+    get:
+      operationId: getFutureScheduledRates
+      tags:
+      - Units & Rates
+      summary: Get future scheduled rate changes for a unit
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      - name: unit_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Scheduled rate changes.
+  /{facility_id}/unit_groups:
+    get:
+      operationId: listUnitGroups
+      tags:
+      - Units & Rates
+      summary: List unit groups
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Unit groups.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UnitGroup'
+    post:
+      operationId: createUnitGroup
+      tags:
+      - Units & Rates
+      summary: Create a unit group
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UnitGroup'
+      responses:
+        '201':
+          description: Unit group created.
+  /{facility_id}/unit_group_tier_rates:
+    get:
+      operationId: listUnitGroupTierRates
+      tags:
+      - Units & Rates
+      summary: List tiered rates for unit groups
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Unit group tier rates.
+  /{facility_id}/unit_group_tier_rates/update:
+    put:
+      operationId: updateUnitGroupTierRates
+      tags:
+      - Units & Rates
+      summary: Update tiered rates for unit groups
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Tier rates updated.
+  /{facility_id}/discount_plans:
+    get:
+      operationId: listDiscountPlans
+      tags:
+      - Units & Rates
+      summary: List discount plans
+      parameters:
+      - $ref: '#/components/parameters/facilityId'
+      responses:
+        '200':
+          description: Discount plans.
+components:
+  parameters:
+    perPage:
+      name: per_page
+      in: query
+      description: Items per page for paginated collection endpoints (default 100).
+      schema:
+        type: integer
+        default: 100
+    page:
+      name: page
+      in: query
+      description: Page number for paginated collection endpoints.
+      schema:
+        type: integer
+        default: 1
+    facilityId:
+      name: facility_id
+      in: path
+      required: true
+      description: The storEDGE facility ID the request is scoped to.
+      schema:
+        type: string
+  schemas:
+    Unit:
+      type: object
+      properties:
+        id:
+          type: string
+        unit_number:
+          type: string
+        unit_group_id:
+          type: string
+        unit_type_id:
+          type: string
+        width:
+          type: number
+        length:
+          type: number
+        standard_rate:
+          type: number
+        web_rate:
+          type: number
+        status:
+          type: string
+          enum:
+          - available
+          - rented
+          - unrentable
+    UnitGroup:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        max_rate:
+          type: number
+    Meta:
+      type: object
+      description: Every storEDGE response body includes a meta hash with request parameters, method, pagination, and status/error details.
+      properties:
+        status_code:
+          type: integer
+        status_message:
+          type: string
+        error_code:
+          type: integer
+          nullable: true
+        request_id:
+          type: string
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_count:
+          type: integer
+    UnitInput:
+      type: object
+      properties:
+        unit_number:
+          type: string
+        unit_group_id:
+          type: string
+        unit_type_id:
+          type: string
+        width:
+          type: number
+        length:
+          type: number
+        standard_rate:
+          type: number
+  securitySchemes:
+    oauth1:
+      type: http
+      scheme: oauth1
+      description: 'Non-standard OpenAPI representation of storEDGE''s actual scheme: one-legged OAuth 1.0. The API access key issued to a storEDGE customer is used as the OAuth consumer key and the API secret key as the consumer secret, signing each request; there is no three-legged redirect/token exchange.'
