@@ -11,7 +11,20 @@ description: Storable is the leading technology provider for the self-storage in
   read the docs), while call access itself requires being a storEDGE customer
   and generating one-legged OAuth 1.0 credentials (API access key/secret) tied to
   a facility ID.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/storable.png
 tags:
 - Self Storage
 - Property Management
@@ -26,216 +39,138 @@ created: '2026-07-03'
 modified: '2026-07-03'
 specificationVersion: '0.19'
 apis:
-- aid: storable:storable-tenants-api
-  name: Storable Tenants API
-  tags:
-  - Tenants
-  - Accounts
-  - Preferences
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://api.storedgefms.com/docs/v1.html
-  baseURL: https://api.storedgefms.com/v1
-  properties:
-  - url: https://api.storedgefms.com/docs/v1.html
-    type: APIReference
-  - url: openapi/storable-openapi.yml
-    type: OpenAPI
-  description: Create, look up, search, and update tenant records scoped to a facility -
-    sign-in/sign-up, username/password recovery, preferences, notes, delinquency
-    status, eligibility, and each tenant's associated leads and ledgers. Endpoints
-    such as GET /v1/:facility_id/tenants and GET /v1/:facility_id/tenants/:id are
-    confirmed in Storable's public v1 API reference.
-- aid: storable:storable-units-rate-management-api
-  name: Storable Units & Rate Management API
-  tags:
-  - Units
-  - Inventory
-  - Rate Management
-  - Unit Groups
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://api.storedgefms.com/docs/v1.html
-  baseURL: https://api.storedgefms.com/v1
-  properties:
-  - url: https://api.storedgefms.com/docs/v1.html
-    type: APIReference
-  - url: openapi/storable-openapi.yml
-    type: OpenAPI
-  description: Manage unit inventory (list, availability, walk-thru, bulk create/update,
-    rate history, future scheduled rates), unit groups and unit types, tiered
-    unit-group rates, rate-applied actions, and discount plans. Confirmed endpoints
-    include GET /v1/:facility_id/units/available and PUT /v1/:facility_id/unit_group_tier_rates/update.
-- aid: storable:storable-ledgers-payments-api
-  name: Storable Ledgers & Payments API
-  tags:
-  - Ledgers
-  - Payments
-  - Invoices
-  - Billing
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://api.storedgefms.com/docs/v1.html
-  baseURL: https://api.storedgefms.com/v1
-  properties:
-  - url: https://api.storedgefms.com/docs/v1.html
-    type: APIReference
-  - url: openapi/storable-openapi.yml
-    type: OpenAPI
-  description: Read tenant ledgers and delinquency/eligibility state, make and batch
-    payments, manage autopay and gate-access codes on a ledger, register payment
-    methods and payment intents, authorize funds, and retrieve invoices and
-    invoiceable items (fees, retail, insurance, services). Confirmed endpoints
-    include POST /v1/:facility_id/ledgers/:ledger_id/make_payment and
-    GET /v1/:facility_id/payment_intents.
-- aid: storable:storable-leads-reservations-api
-  name: Storable Leads & Reservations API
-  tags:
-  - Leads
-  - Reservations
-  - Waitlist
-  - CRM
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://api.storedgefms.com/docs/v1.html
-  baseURL: https://api.storedgefms.com/v1
-  properties:
-  - url: https://api.storedgefms.com/docs/v1.html
-    type: APIReference
-  - url: openapi/storable-openapi.yml
-    type: OpenAPI
-  description: Create and manage leads across the pipeline - current, reservations,
-    inquiries, missed move-ins, and waitlist - at the facility, company, and
-    per-tenant level, including counts and open-event views used to drive
-    call-center and website booking flows. Confirmed endpoints include
-    GET /v1/:facility_id/leads/reservations and POST /v1/:facility_id/leads.
-- aid: storable:storable-move-ins-move-outs-api
-  name: Storable Move Ins & Move Outs API
-  tags:
-  - Move In
-  - Move Out
-  - Rentals
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://api.storedgefms.com/docs/v1.html
-  baseURL: https://api.storedgefms.com/v1
-  properties:
-  - url: https://api.storedgefms.com/docs/v1.html
-    type: APIReference
-  - url: openapi/storable-openapi.yml
-    type: OpenAPI
-  description: Review costs and process move-ins, and review costs, schedule, cancel,
-    and process move-outs, plus retrieve move-out reasons and applicable rates -
-    the rental and vacate lifecycle behind SiteLink/storEDGE's online rental flow.
-    Confirmed endpoints include POST /v1/:facility_id/move_ins/process_move_in
-    and POST /v1/:facility_id/move_outs/process_move_out.
-- aid: storable:storable-gate-access-api
-  name: Storable Gate Access API
-  tags:
-  - Gate Access
-  - Security
-  - Access Control
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://api.storedgefms.com/docs/v1.html
-  baseURL: https://api.storedgefms.com/v1
-  properties:
-  - url: https://api.storedgefms.com/docs/v1.html
-    type: APIReference
-  - url: openapi/storable-openapi.yml
-    type: OpenAPI
-  description: Check gate-code availability, open gates, log gate activity events,
-    and list a facility's access points, integrating storEDGE with third-party
-    gate/security hardware. Confirmed endpoints include
-    POST /v1/:facility_id/gate_codes/open and GET /v1/:facility_id/access_points.
-- aid: storable:storable-insurance-api
-  name: Storable Insurance API
-  tags:
-  - Insurance
-  - Tenant Protection
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://api.storedgefms.com/docs/v1.html
-  baseURL: https://api.storedgefms.com/v1
-  properties:
-  - url: https://api.storedgefms.com/docs/v1.html
-    type: APIReference
-  - url: openapi/storable-openapi.yml
-    type: OpenAPI
-  description: Retrieve facility-level insurance summary and activity, configure
-    tenant auto-enrollment settings, and record private (non-Storable) insurance
-    coverage on a ledger. Confirmed endpoints include GET /v1/:facility_id/insurance/summary
-    and PUT /v1/:facility_id/insurance/tenant_auto_enroll_settings.
-- aid: storable:storable-tasks-api
-  name: Storable Tasks API
-  tags:
-  - Tasks
-  - Operations
-  - Workflow
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://api.storedgefms.com/docs/v1.html
-  baseURL: https://api.storedgefms.com/v1
-  properties:
-  - url: https://api.storedgefms.com/docs/v1.html
-    type: APIReference
-  - url: openapi/storable-openapi.yml
-    type: OpenAPI
-  description: Create, complete, and bulk-manage operational tasks at both the
-    facility level and the individual unit level, with task categories for
-    on-site workflow tracking. Confirmed endpoints include
-    GET /v1/:facility_id/tasks/categories and
-    PUT /v1/:facility_id/units/:unit_id/tasks/bulk_complete.
-- aid: storable:storable-documents-esign-api
-  name: Storable Documents & eSign API
-  tags:
-  - Documents
-  - eSignature
-  - Leases
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://api.storedgefms.com/docs/v1.html
-  baseURL: https://api.storedgefms.com/v1
-  properties:
-  - url: https://api.storedgefms.com/docs/v1.html
-    type: APIReference
-  - url: openapi/storable-openapi.yml
-    type: OpenAPI
-  description: Retrieve lease and rental documents (including per-session and
-    per-event PDFs), send esignable documents to a tenant, and complete SiteLink
-    eSign on a rental event. Confirmed endpoints include
-    GET /v1/:facility_id/events/:event_id/documents and
-    POST /v1/:facility_id/events/:event_id/esign.
 - aid: storable:storable-delinquency-auctions-api
   name: Storable Delinquency & Auctions API
-  tags:
-  - Delinquency
-  - Auctions
-  - Collections
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  description: Delinquency event tracking and lien-unit auctions.
   humanURL: https://api.storedgefms.com/docs/v1.html
   baseURL: https://api.storedgefms.com/v1
+  tags:
+  - Delinquency & Auctions
   properties:
-  - url: https://api.storedgefms.com/docs/v1.html
-    type: APIReference
-  - url: openapi/storable-openapi.yml
-    type: OpenAPI
-  description: List and act on delinquency events (including bulk verb-based
-    state transitions) and list scheduled or active lien-unit auctions at the
-    facility and company level, feeding auction listing services such as
-    StorageTreasures. Confirmed endpoints include
-    GET /v1/:facility_id/delinquency_events and
-    GET /v1/companies/:company_id/active_auctions.
+  - type: OpenAPI
+    url: openapi/storable-delinquency-auctions-api-openapi.yml
+  - type: APIReference
+    url: https://api.storedgefms.com/docs/v1.html
+- aid: storable:storable-documents-esign-api
+  name: Storable Documents & eSign API
+  description: Lease/rental documents and electronic signature.
+  humanURL: https://api.storedgefms.com/docs/v1.html
+  baseURL: https://api.storedgefms.com/v1
+  tags:
+  - Documents & eSign
+  properties:
+  - type: OpenAPI
+    url: openapi/storable-documents-esign-api-openapi.yml
+  - type: APIReference
+    url: https://api.storedgefms.com/docs/v1.html
+- aid: storable:storable-gate-access-api
+  name: Storable Gate Access API
+  description: Gate codes, access points, and gate activity logging.
+  humanURL: https://api.storedgefms.com/docs/v1.html
+  baseURL: https://api.storedgefms.com/v1
+  tags:
+  - Gate Access
+  properties:
+  - type: OpenAPI
+    url: openapi/storable-gate-access-api-openapi.yml
+  - type: APIReference
+    url: https://api.storedgefms.com/docs/v1.html
+- aid: storable:storable-insurance-api
+  name: Storable Insurance API
+  description: Tenant protection plan summary, activity, and enrollment settings.
+  humanURL: https://api.storedgefms.com/docs/v1.html
+  baseURL: https://api.storedgefms.com/v1
+  tags:
+  - Insurance
+  properties:
+  - type: OpenAPI
+    url: openapi/storable-insurance-api-openapi.yml
+  - type: APIReference
+    url: https://api.storedgefms.com/docs/v1.html
+- aid: storable:storable-leads-reservations-api
+  name: Storable Leads & Reservations API
+  description: Lead pipeline - reservations, inquiries, waitlist.
+  humanURL: https://api.storedgefms.com/docs/v1.html
+  baseURL: https://api.storedgefms.com/v1
+  tags:
+  - Leads & Reservations
+  properties:
+  - type: OpenAPI
+    url: openapi/storable-leads-reservations-api-openapi.yml
+  - type: APIReference
+    url: https://api.storedgefms.com/docs/v1.html
+- aid: storable:storable-ledgers-payments-api
+  name: Storable Ledgers & Payments API
+  description: Tenant ledgers, payments, payment methods, invoices.
+  humanURL: https://api.storedgefms.com/docs/v1.html
+  baseURL: https://api.storedgefms.com/v1
+  tags:
+  - Ledgers & Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/storable-ledgers-payments-api-openapi.yml
+  - type: APIReference
+    url: https://api.storedgefms.com/docs/v1.html
+- aid: storable:storable-move-ins-outs-api
+  name: Storable Move Ins & Outs API
+  description: Rental move-in and move-out lifecycle.
+  humanURL: https://api.storedgefms.com/docs/v1.html
+  baseURL: https://api.storedgefms.com/v1
+  tags:
+  - Move Ins & Outs
+  properties:
+  - type: OpenAPI
+    url: openapi/storable-move-ins-outs-api-openapi.yml
+  - type: APIReference
+    url: https://api.storedgefms.com/docs/v1.html
 - aid: storable:storable-reporting-api
   name: Storable Reporting API
-  tags:
-  - Reporting
-  - Business Intelligence
-  - Analytics
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  description: Asynchronous report requests at the facility and company level.
   humanURL: https://api.storedgefms.com/docs/v1.html
   baseURL: https://api.storedgefms.com/v1
+  tags:
+  - Reporting
   properties:
-  - url: https://api.storedgefms.com/docs/v1.html
-    type: APIReference
-  - url: openapi/storable-openapi.yml
-    type: OpenAPI
-  description: Request and poll asynchronous report bundles at the facility or
-    company level and retrieve completed results as JSON, plus check/register
-    Business Intelligence Express enablement for a company. Confirmed endpoints
-    include POST /v1/companies/:company_id/report_requests and
-    GET /v1/:facility_id/report_requests/:id/completed_json.
+  - type: OpenAPI
+    url: openapi/storable-reporting-api-openapi.yml
+  - type: APIReference
+    url: https://api.storedgefms.com/docs/v1.html
+- aid: storable:storable-tasks-api
+  name: Storable Tasks API
+  description: Facility and unit-level operational task management.
+  humanURL: https://api.storedgefms.com/docs/v1.html
+  baseURL: https://api.storedgefms.com/v1
+  tags:
+  - Tasks
+  properties:
+  - type: OpenAPI
+    url: openapi/storable-tasks-api-openapi.yml
+  - type: APIReference
+    url: https://api.storedgefms.com/docs/v1.html
+- aid: storable:storable-tenants-api
+  name: Storable Tenants API
+  description: Tenant accounts, preferences, notes, and eligibility.
+  humanURL: https://api.storedgefms.com/docs/v1.html
+  baseURL: https://api.storedgefms.com/v1
+  tags:
+  - Tenants
+  properties:
+  - type: OpenAPI
+    url: openapi/storable-tenants-api-openapi.yml
+  - type: APIReference
+    url: https://api.storedgefms.com/docs/v1.html
+- aid: storable:storable-units-rates-api
+  name: Storable Units & Rates API
+  description: Unit inventory, unit groups/types, and tiered rate management.
+  humanURL: https://api.storedgefms.com/docs/v1.html
+  baseURL: https://api.storedgefms.com/v1
+  tags:
+  - Units & Rates
+  properties:
+  - type: OpenAPI
+    url: openapi/storable-units-rates-api-openapi.yml
+  - type: APIReference
+    url: https://api.storedgefms.com/docs/v1.html
 common:
 - type: AgenticAccess
   url: agentic-access/storable-agentic-access.yml
