@@ -1,0 +1,34 @@
+{
+  "provider": "storable",
+  "sources": [
+    "storable-delinquency-auctions-api-openapi.yml",
+    "storable-documents-esign-api-openapi.yml",
+    "storable-gate-access-api-openapi.yml",
+    "storable-insurance-api-openapi.yml",
+    "storable-leads-reservations-api-openapi.yml",
+    "storable-ledgers-payments-api-openapi.yml",
+    "storable-move-ins-outs-api-openapi.yml",
+    "storable-reporting-api-openapi.yml",
+    "storable-tasks-api-openapi.yml",
+    "storable-tenants-api-openapi.yml",
+    "storable-units-rates-api-openapi.yml"
+  ],
+  "outputs": [
+    "storable-delinquency-auctions-api-openapi.yml",
+    "storable-documents-esign-api-openapi.yml",
+    "storable-gate-access-api-openapi.yml",
+    "storable-insurance-api-openapi.yml",
+    "storable-leads-reservations-api-openapi.yml",
+    "storable-ledgers-payments-api-openapi.yml",
+    "storable-move-ins-outs-api-openapi.yml",
+    "storable-reporting-api-openapi.yml",
+    "storable-tasks-api-openapi.yml",
+    "storable-tenants-api-openapi.yml",
+    "storable-units-rates-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
