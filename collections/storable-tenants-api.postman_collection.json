@@ -1,0 +1,1089 @@
+{
+  "item": [
+    {
+      "id": "42d32942-e2ac-4727-b4d5-9832303416dd",
+      "name": "Tenants",
+      "description": {
+        "content": "Tenant accounts, preferences, notes, and eligibility.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4f4c16b6-9eae-4e03-a1e2-944463d36a0c",
+          "name": "List tenants",
+          "request": {
+            "name": "List tenants",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "tenants"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated collection endpoints."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Items per page for paginated collection endpoints (default 100)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4255491e-ecbc-48a8-93e3-b97b21f552dd",
+              "name": "A page of tenants.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status_code\": 2702,\n    \"status_message\": \"string\",\n    \"error_code\": 7388,\n    \"request_id\": \"string\",\n    \"page\": 614,\n    \"per_page\": 729,\n    \"total_count\": 7936\n  },\n  \"tenants\": [\n    {\n      \"id\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"string\",\n      \"phone\": \"string\",\n      \"status\": \"previous\",\n      \"facility_id\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"string\",\n      \"phone\": \"string\",\n      \"status\": \"current\",\n      \"facility_id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37dddd82-cb56-4bde-ad72-1ba8e564494a",
+              "name": "Missing or invalid OAuth 1.0 signature/credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "tenants"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd3019f6-585b-4613-b68e-94c5d84ffecb",
+          "name": "Get a tenant by ID",
+          "request": {
+            "name": "Get a tenant by ID",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "tenants",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e78aa5c-2ada-4d24-99cf-9e7764daa11d",
+              "name": "The tenant.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "tenants",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"email\": \"string\",\n  \"phone\": \"string\",\n  \"status\": \"previous\",\n  \"facility_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b1a47a7-0549-4bdd-94eb-d29c23635f91",
+              "name": "Resource not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "tenants",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6e29883-e720-4955-b33c-69107de7b324",
+          "name": "Update a tenant",
+          "request": {
+            "name": "Update a tenant",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "tenants",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4a9df360-06ee-4d6b-8abc-9c849d45f706",
+              "name": "The updated tenant.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "tenants",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"first_name\": \"string\",\n  \"last_name\": \"string\",\n  \"email\": \"string\",\n  \"phone\": \"string\",\n  \"status\": \"previous\",\n  \"facility_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ee58e270-0562-4b56-974c-08858d2dd7ed",
+          "name": "Search tenants",
+          "request": {
+            "name": "Search tenants",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "tenants",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc8a61c5-8e81-491a-921b-5920bfedfdd5",
+              "name": "Matching tenants.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "tenants",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"string\",\n    \"phone\": \"string\",\n    \"status\": \"current\",\n    \"facility_id\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"first_name\": \"string\",\n    \"last_name\": \"string\",\n    \"email\": \"string\",\n    \"phone\": \"string\",\n    \"status\": \"current\",\n    \"facility_id\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bbeb81cd-eb4b-48dc-b03e-030850b026cb",
+          "name": "Get tenant communication preferences",
+          "request": {
+            "name": "Get tenant communication preferences",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "tenants",
+                ":tenant_id",
+                "preferences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "094828eb-af90-40f0-b402-8cbed65a0dd8",
+              "name": "Tenant preferences.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "tenants",
+                    ":tenant_id",
+                    "preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"email_opt_in\": false,\n  \"sms_opt_in\": true,\n  \"autopay_reminders\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94af12f0-1ecb-4eb0-b5e1-2a4ce1e5fd62",
+          "name": "Update tenant communication preferences",
+          "request": {
+            "name": "Update tenant communication preferences",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "tenants",
+                ":tenant_id",
+                "preferences"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email_opt_in\": \"<boolean>\",\n  \"sms_opt_in\": \"<boolean>\",\n  \"autopay_reminders\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dbc82648-57b7-495c-b5a3-81e0900e6077",
+              "name": "Updated preferences.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "tenants",
+                    ":tenant_id",
+                    "preferences"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email_opt_in\": \"<boolean>\",\n  \"sms_opt_in\": \"<boolean>\",\n  \"autopay_reminders\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ed50124-f6fb-4452-82cb-5e3f830bffa4",
+          "name": "Add a note to a tenant",
+          "request": {
+            "name": "Add a note to a tenant",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "tenants",
+                ":tenant_id",
+                "notes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tenant_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"note\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "17ea8556-fc02-4fa2-98ee-7d91ed2293af",
+              "name": "Note created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "tenants",
+                    ":tenant_id",
+                    "notes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tenant_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"note\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "282d0d62-5b45-4d34-893b-d24cb2ad7e68",
+          "name": "Authenticate a tenant against the tenant portal",
+          "request": {
+            "name": "Authenticate a tenant against the tenant portal",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "tenants",
+                "sign_in"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9e5f980c-5e8f-4050-8168-47eb6532353d",
+              "name": "Sign-in result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "tenants",
+                    "sign_in"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"username\": \"<string>\",\n  \"password\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.storedgefms.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth1",
+    "oauth1": [
+      {
+        "key": "consumerSecret",
+        "value": "{{consumerSecret}}"
+      },
+      {
+        "key": "consumerKey",
+        "value": "{{consumerKey}}"
+      },
+      {
+        "key": "addParamsToHeader",
+        "value": true
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "559d3157-6834-4518-914e-0c9c4d149563",
+    "name": "Storable Edge (storEDGE) Delinquency & Auctions Tenants API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A representative OpenAPI reference for the Storable Edge (storEDGE) REST API, the modern property-management API in the Storable brand family (SiteLink, storEDGE, SpareFoot). The endpoint paths, HTTP methods, and parameter names below are taken from Storable's public v1 API reference at https://api.storedgefms.com/docs/v1.html. That page enumerates roughly 150 endpoints across tenants, units, ledgers, leads, move-ins/outs, gate access, insurance, tasks, documents/eSign, delinquency/auctions, and reporting; this document models a representative subset of those confirmed paths per resource area rather than every documented route. Response/request body schemas below are reasonably modeled from the named resources (tenant, unit, ledger, lead, etc.) since the source page documents endpoints and parameters but was not captured with full field-by-field JSON schemas - treat schema properties as illustrative, not a verbatim contract. All calls are scoped to a facility (or company) by path parameter and authenticated with one-legged OAuth 1.0 (API access key + secret issued to a storEDGE customer, used as the OAuth consumer key/secret with no additional handshake).\n\nContact Support:\n Name: Storable",
+      "type": "text/plain"
+    }
+  }
+}

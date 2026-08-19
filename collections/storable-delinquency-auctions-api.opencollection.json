@@ -1,0 +1,129 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Storable Edge (storEDGE) Delinquency & Auctions API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Delinquency & Auctions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List delinquency events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/delinquency_events",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "List delinquency events"
+        },
+        {
+          "info": {
+            "name": "Get a delinquency event by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/delinquency_events/:id",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a delinquency event by ID"
+        },
+        {
+          "info": {
+            "name": "Apply a state-transition verb to a delinquency event",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.storedgefms.com/v1/:facility_id/delinquency_events/:id/:verb",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "verb",
+                "value": "",
+                "type": "path",
+                "description": "Action verb, e.g. waive, escalate, resolve."
+              }
+            ]
+          },
+          "docs": "Apply a state-transition verb to a delinquency event"
+        },
+        {
+          "info": {
+            "name": "List scheduled lien-unit auctions for a facility",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/auctions/scheduled",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "List scheduled lien-unit auctions for a facility"
+        },
+        {
+          "info": {
+            "name": "List active auctions across every facility in a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/companies/:company_id/active_auctions",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE company (multi-facility account) ID."
+              }
+            ]
+          },
+          "docs": "List active auctions across every facility in a company"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

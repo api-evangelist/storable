@@ -1,0 +1,167 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Storable Edge (storEDGE) Delinquency & Auctions Move Ins & Outs API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Move Ins & Outs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List move-ins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/move_ins",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "List move-ins"
+        },
+        {
+          "info": {
+            "name": "Preview the cost of a prospective move-in",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.storedgefms.com/v1/:facility_id/move_ins/review_cost",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Preview the cost of a prospective move-in"
+        },
+        {
+          "info": {
+            "name": "Process a move-in",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.storedgefms.com/v1/:facility_id/move_ins/process_move_in",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a move-in"
+        },
+        {
+          "info": {
+            "name": "List move-outs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/move_outs",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "List move-outs"
+        },
+        {
+          "info": {
+            "name": "List move-out reason codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/move_outs/reasons",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "List move-out reason codes"
+        },
+        {
+          "info": {
+            "name": "Schedule a future move-out",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.storedgefms.com/v1/:facility_id/move_outs/schedule_move_out",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Schedule a future move-out"
+        },
+        {
+          "info": {
+            "name": "Process a move-out",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.storedgefms.com/v1/:facility_id/move_outs/process_move_out",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Process a move-out"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

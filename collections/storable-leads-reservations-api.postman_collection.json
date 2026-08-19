@@ -1,0 +1,746 @@
+{
+  "item": [
+    {
+      "id": "c1b2aaeb-8743-45a2-aafe-2b43d34cf118",
+      "name": "Leads & Reservations",
+      "description": {
+        "content": "Lead pipeline - reservations, inquiries, waitlist.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "82f11200-4f6f-4adc-afc8-3c828a4aeec4",
+          "name": "List leads",
+          "request": {
+            "name": "List leads",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "leads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated collection endpoints."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Items per page for paginated collection endpoints (default 100)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c209904-58d6-4054-b4f6-a072105fc86b",
+              "name": "A page of leads.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "leads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status_code\": 5750,\n    \"status_message\": \"string\",\n    \"error_code\": 1686,\n    \"request_id\": \"string\",\n    \"page\": 8262,\n    \"per_page\": 9102,\n    \"total_count\": 9954\n  },\n  \"leads\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"waitlist\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"string\",\n      \"phone\": \"string\",\n      \"unit_group_id\": \"string\",\n      \"source\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"missed_move_in\",\n      \"first_name\": \"string\",\n      \"last_name\": \"string\",\n      \"email\": \"string\",\n      \"phone\": \"string\",\n      \"unit_group_id\": \"string\",\n      \"source\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ae24e68-fafc-4029-9bd5-4fd12d3039ee",
+          "name": "Create a lead (inquiry, reservation, or waitlist entry)",
+          "request": {
+            "name": "Create a lead (inquiry, reservation, or waitlist entry)",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "leads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"unit_group_id\": \"<string>\",\n  \"source\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3632b479-69c1-4681-a63d-821a051216d3",
+              "name": "Lead created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "leads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"unit_group_id\": \"<string>\",\n  \"source\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8161b33-e400-45bb-8d5f-4a216a0d2269",
+          "name": "Update a lead",
+          "request": {
+            "name": "Update a lead",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "leads",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"unit_group_id\": \"<string>\",\n  \"source\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8706b564-284b-4029-8de5-273059e1bc55",
+              "name": "Lead updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "leads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"email\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"unit_group_id\": \"<string>\",\n  \"source\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "189ce3d3-1529-4251-b14e-92c4a8f52b0b",
+          "name": "Delete a lead",
+          "request": {
+            "name": "Delete a lead",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "leads",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9e1c3301-17b9-44a2-af1c-41f6dcb47425",
+              "name": "Lead deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "leads",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "da365131-d6f4-46e6-8ffa-08c4466a86f1",
+          "name": "List leads in reservation status",
+          "request": {
+            "name": "List leads in reservation status",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "leads",
+                "reservations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e2e2b447-131e-4126-a921-fbe4c07e548d",
+              "name": "Reservation leads.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "leads",
+                    "reservations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff4f3fa4-c75c-46aa-8d08-1c3432705673",
+          "name": "List waitlisted leads",
+          "request": {
+            "name": "List waitlisted leads",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "leads",
+                "waitlist"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5bbc13f1-59da-47dd-b72c-da9db1451932",
+              "name": "Waitlisted leads.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "leads",
+                    "waitlist"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b276f57-c4af-4019-bc51-1d9291157e4b",
+          "name": "List leads across every facility in a company",
+          "request": {
+            "name": "List leads across every facility in a company",
+            "description": {},
+            "url": {
+              "path": [
+                "companies",
+                ":company_id",
+                "leads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "company_id",
+                  "description": "(Required) The storEDGE company (multi-facility account) ID."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2e183bb3-173b-4ff5-979a-4485b47e04b1",
+              "name": "Company-wide leads.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":company_id",
+                    "leads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) The storEDGE company (multi-facility account) ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.storedgefms.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth1",
+    "oauth1": [
+      {
+        "key": "consumerSecret",
+        "value": "{{consumerSecret}}"
+      },
+      {
+        "key": "consumerKey",
+        "value": "{{consumerKey}}"
+      },
+      {
+        "key": "addParamsToHeader",
+        "value": true
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b78ff54c-3237-4ea7-a18b-8c4d9195d17d",
+    "name": "Storable Edge (storEDGE) Delinquency & Auctions Leads & Reservations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A representative OpenAPI reference for the Storable Edge (storEDGE) REST API, the modern property-management API in the Storable brand family (SiteLink, storEDGE, SpareFoot). The endpoint paths, HTTP methods, and parameter names below are taken from Storable's public v1 API reference at https://api.storedgefms.com/docs/v1.html. That page enumerates roughly 150 endpoints across tenants, units, ledgers, leads, move-ins/outs, gate access, insurance, tasks, documents/eSign, delinquency/auctions, and reporting; this document models a representative subset of those confirmed paths per resource area rather than every documented route. Response/request body schemas below are reasonably modeled from the named resources (tenant, unit, ledger, lead, etc.) since the source page documents endpoints and parameters but was not captured with full field-by-field JSON schemas - treat schema properties as illustrative, not a verbatim contract. All calls are scoped to a facility (or company) by path parameter and authenticated with one-legged OAuth 1.0 (API access key + secret issued to a storEDGE customer, used as the OAuth consumer key/secret with no additional handshake).\n\nContact Support:\n Name: Storable",
+      "type": "text/plain"
+    }
+  }
+}

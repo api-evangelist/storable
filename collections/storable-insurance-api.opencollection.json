@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Storable Edge (storEDGE) Delinquency & Auctions Insurance API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Insurance",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get facility-level tenant protection/insurance summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/insurance/summary",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "Get facility-level tenant protection/insurance summary"
+        },
+        {
+          "info": {
+            "name": "Get facility-level insurance enrollment activity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/insurance/activity",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "Get facility-level insurance enrollment activity"
+        },
+        {
+          "info": {
+            "name": "Update tenant insurance auto-enrollment settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.storedgefms.com/v1/:facility_id/insurance/tenant_auto_enroll_settings",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update tenant insurance auto-enrollment settings"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

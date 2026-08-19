@@ -1,0 +1,283 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Storable Edge (storEDGE) Delinquency & Auctions Units & Rates API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Units & Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List units",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/units",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated collection endpoints."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Items per page for paginated collection endpoints (default 100)."
+              }
+            ]
+          },
+          "docs": "List units"
+        },
+        {
+          "info": {
+            "name": "Create a unit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.storedgefms.com/v1/:facility_id/units",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a unit"
+        },
+        {
+          "info": {
+            "name": "List units available for rent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/units/available",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "List units available for rent"
+        },
+        {
+          "info": {
+            "name": "Bulk create units",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.storedgefms.com/v1/:facility_id/units/bulk_create",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk create units"
+        },
+        {
+          "info": {
+            "name": "Bulk update units",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.storedgefms.com/v1/:facility_id/units/bulk_update",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk update units"
+        },
+        {
+          "info": {
+            "name": "Get historical unit rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/units/rate_history",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "Get historical unit rates"
+        },
+        {
+          "info": {
+            "name": "Get future scheduled rate changes for a unit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/units/:unit_id/future_scheduled_rates",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "unit_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get future scheduled rate changes for a unit"
+        },
+        {
+          "info": {
+            "name": "List unit groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/unit_groups",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "List unit groups"
+        },
+        {
+          "info": {
+            "name": "Create a unit group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.storedgefms.com/v1/:facility_id/unit_groups",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a unit group"
+        },
+        {
+          "info": {
+            "name": "List tiered rates for unit groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/unit_group_tier_rates",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "List tiered rates for unit groups"
+        },
+        {
+          "info": {
+            "name": "Update tiered rates for unit groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.storedgefms.com/v1/:facility_id/unit_group_tier_rates/update",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update tiered rates for unit groups"
+        },
+        {
+          "info": {
+            "name": "List discount plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/discount_plans",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "List discount plans"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

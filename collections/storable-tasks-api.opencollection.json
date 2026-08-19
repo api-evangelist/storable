@@ -1,0 +1,136 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Storable Edge (storEDGE) Delinquency & Auctions Tasks API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List facility-level tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/tasks",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "List facility-level tasks"
+        },
+        {
+          "info": {
+            "name": "Create a facility-level task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.storedgefms.com/v1/:facility_id/tasks",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a facility-level task"
+        },
+        {
+          "info": {
+            "name": "Mark a task complete",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.storedgefms.com/v1/:facility_id/tasks/:id/complete",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Mark a task complete"
+        },
+        {
+          "info": {
+            "name": "List tasks scoped to a unit",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/units/:unit_id/tasks",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "unit_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List tasks scoped to a unit"
+        },
+        {
+          "info": {
+            "name": "Create a task scoped to a unit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.storedgefms.com/v1/:facility_id/units/:unit_id/tasks",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "unit_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a task scoped to a unit"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

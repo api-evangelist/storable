@@ -1,0 +1,122 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Storable Edge (storEDGE) Delinquency & Auctions Documents & eSign API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents & eSign",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a document (e.g. lease PDF) by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/documents/:id",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a document (e.g. lease PDF) by ID"
+        },
+        {
+          "info": {
+            "name": "List documents associated with a rental event",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/events/:event_id/documents",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List documents associated with a rental event"
+        },
+        {
+          "info": {
+            "name": "Send esignable documents to a tenant for a rental event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.storedgefms.com/v1/:facility_id/documents/:event_id/send_esignable_documents",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Send esignable documents to a tenant for a rental event"
+        },
+        {
+          "info": {
+            "name": "Complete eSignature for a rental event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.storedgefms.com/v1/:facility_id/events/:event_id/esign",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "event_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Complete eSignature for a rental event"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,564 @@
+{
+  "item": [
+    {
+      "id": "eefdc1e9-6809-49a7-aafb-d30080061241",
+      "name": "Tasks",
+      "description": {
+        "content": "Facility and unit-level operational task management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "209c5101-ca48-4f83-9c54-0aaed447caaf",
+          "name": "List facility-level tasks",
+          "request": {
+            "name": "List facility-level tasks",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "852ce4f9-0fa6-4399-bc8e-8fdc890dddce",
+              "name": "Tasks.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c692852a-48b2-4d45-843d-ed2cc734f614",
+          "name": "Create a facility-level task",
+          "request": {
+            "name": "Create a facility-level task",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category\": \"<string>\",\n  \"description\": \"<string>\",\n  \"due_date\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1f929424-573a-4ce9-8a4b-aa6394dcb598",
+              "name": "Task created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"category\": \"<string>\",\n  \"description\": \"<string>\",\n  \"due_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1cd05d0d-67c9-420e-bb7d-8afdc0523273",
+          "name": "Mark a task complete",
+          "request": {
+            "name": "Mark a task complete",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "tasks",
+                ":id",
+                "complete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "825c1404-b64a-4697-9861-2821d6d40c48",
+              "name": "Task marked complete.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "tasks",
+                    ":id",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "721233a1-29ba-45bb-8647-66f8573d6f17",
+          "name": "List tasks scoped to a unit",
+          "request": {
+            "name": "List tasks scoped to a unit",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "units",
+                ":unit_id",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "unit_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ca4f5096-825a-4eef-b271-76d055084290",
+              "name": "Unit tasks.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "units",
+                    ":unit_id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "unit_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ec0bbff-900a-4230-8515-9add5502d573",
+          "name": "Create a task scoped to a unit",
+          "request": {
+            "name": "Create a task scoped to a unit",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "units",
+                ":unit_id",
+                "tasks"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "unit_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"category\": \"<string>\",\n  \"description\": \"<string>\",\n  \"due_date\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a4a6e7a5-b913-4cdc-b5c8-aee7bf3acf67",
+              "name": "Unit task created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "units",
+                    ":unit_id",
+                    "tasks"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "unit_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"category\": \"<string>\",\n  \"description\": \"<string>\",\n  \"due_date\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.storedgefms.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth1",
+    "oauth1": [
+      {
+        "key": "consumerSecret",
+        "value": "{{consumerSecret}}"
+      },
+      {
+        "key": "consumerKey",
+        "value": "{{consumerKey}}"
+      },
+      {
+        "key": "addParamsToHeader",
+        "value": true
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2d33dddb-ed99-4c7a-b0ba-37137f9082c9",
+    "name": "Storable Edge (storEDGE) Delinquency & Auctions Tasks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A representative OpenAPI reference for the Storable Edge (storEDGE) REST API, the modern property-management API in the Storable brand family (SiteLink, storEDGE, SpareFoot). The endpoint paths, HTTP methods, and parameter names below are taken from Storable's public v1 API reference at https://api.storedgefms.com/docs/v1.html. That page enumerates roughly 150 endpoints across tenants, units, ledgers, leads, move-ins/outs, gate access, insurance, tasks, documents/eSign, delinquency/auctions, and reporting; this document models a representative subset of those confirmed paths per resource area rather than every documented route. Response/request body schemas below are reasonably modeled from the named resources (tenant, unit, ledger, lead, etc.) since the source page documents endpoints and parameters but was not captured with full field-by-field JSON schemas - treat schema properties as illustrative, not a verbatim contract. All calls are scoped to a facility (or company) by path parameter and authenticated with one-legged OAuth 1.0 (API access key + secret issued to a storEDGE customer, used as the OAuth consumer key/secret with no additional handshake).\n\nContact Support:\n Name: Storable",
+      "type": "text/plain"
+    }
+  }
+}

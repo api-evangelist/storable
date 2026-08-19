@@ -1,0 +1,1240 @@
+{
+  "item": [
+    {
+      "id": "286019a3-7f2a-4a7d-bc0e-0d97fb62f8b8",
+      "name": "Units & Rates",
+      "description": {
+        "content": "Unit inventory, unit groups/types, and tiered rate management.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "333f8b5e-40de-4a68-ae3d-1a7881246201",
+          "name": "List units",
+          "request": {
+            "name": "List units",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "units"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number for paginated collection endpoints."
+                },
+                {
+                  "disabled": false,
+                  "key": "per_page",
+                  "value": "100",
+                  "description": "Items per page for paginated collection endpoints (default 100)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fcb9f7a7-a747-46f8-8b82-22d935cc4133",
+              "name": "A page of units.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "units"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "per_page",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"status_code\": 8458,\n    \"status_message\": \"string\",\n    \"error_code\": 7921,\n    \"request_id\": \"string\",\n    \"page\": 1784,\n    \"per_page\": 6286,\n    \"total_count\": 7652\n  },\n  \"units\": [\n    {\n      \"id\": \"string\",\n      \"unit_number\": \"string\",\n      \"unit_group_id\": \"string\",\n      \"unit_type_id\": \"string\",\n      \"width\": 6022.412164548324,\n      \"length\": 9410.604920860966,\n      \"standard_rate\": 480.74057599780787,\n      \"web_rate\": 2086.890555947761,\n      \"status\": \"available\"\n    },\n    {\n      \"id\": \"string\",\n      \"unit_number\": \"string\",\n      \"unit_group_id\": \"string\",\n      \"unit_type_id\": \"string\",\n      \"width\": 175.73342393935155,\n      \"length\": 3681.357801603795,\n      \"standard_rate\": 610.1090961300338,\n      \"web_rate\": 5557.0668268590525,\n      \"status\": \"available\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "045d2ed3-c576-4437-9d22-141c6afa045d",
+          "name": "Create a unit",
+          "request": {
+            "name": "Create a unit",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "units"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"unit_number\": \"<string>\",\n  \"unit_group_id\": \"<string>\",\n  \"unit_type_id\": \"<string>\",\n  \"width\": \"<number>\",\n  \"length\": \"<number>\",\n  \"standard_rate\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "eb10b7ff-2587-411a-95dd-54d02e18af8c",
+              "name": "Unit created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "units"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"unit_number\": \"<string>\",\n  \"unit_group_id\": \"<string>\",\n  \"unit_type_id\": \"<string>\",\n  \"width\": \"<number>\",\n  \"length\": \"<number>\",\n  \"standard_rate\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41ed5cbd-0150-4473-97cc-904f9cade8c3",
+          "name": "List units available for rent",
+          "request": {
+            "name": "List units available for rent",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "units",
+                "available"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "efb4cf02-5211-491c-a0c0-a6061d216e1b",
+              "name": "Available units.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "units",
+                    "available"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"unit_number\": \"string\",\n    \"unit_group_id\": \"string\",\n    \"unit_type_id\": \"string\",\n    \"width\": 4666.548793588095,\n    \"length\": 7391.966751166973,\n    \"standard_rate\": 3963.864626299525,\n    \"web_rate\": 1508.1050168660327,\n    \"status\": \"unrentable\"\n  },\n  {\n    \"id\": \"string\",\n    \"unit_number\": \"string\",\n    \"unit_group_id\": \"string\",\n    \"unit_type_id\": \"string\",\n    \"width\": 2485.140008606407,\n    \"length\": 4487.3661349493295,\n    \"standard_rate\": 4955.597547223488,\n    \"web_rate\": 7933.504589818254,\n    \"status\": \"rented\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb63f6eb-213d-4503-a8a6-a61e30b9630b",
+          "name": "Bulk create units",
+          "request": {
+            "name": "Bulk create units",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "units",
+                "bulk_create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"units\": [\n    {\n      \"unit_number\": \"<string>\",\n      \"unit_group_id\": \"<string>\",\n      \"unit_type_id\": \"<string>\",\n      \"width\": \"<number>\",\n      \"length\": \"<number>\",\n      \"standard_rate\": \"<number>\"\n    },\n    {\n      \"unit_number\": \"<string>\",\n      \"unit_group_id\": \"<string>\",\n      \"unit_type_id\": \"<string>\",\n      \"width\": \"<number>\",\n      \"length\": \"<number>\",\n      \"standard_rate\": \"<number>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b23e783d-5900-4351-8737-5f2307a0fab3",
+              "name": "Units created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "units",
+                    "bulk_create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"units\": [\n    {\n      \"unit_number\": \"<string>\",\n      \"unit_group_id\": \"<string>\",\n      \"unit_type_id\": \"<string>\",\n      \"width\": \"<number>\",\n      \"length\": \"<number>\",\n      \"standard_rate\": \"<number>\"\n    },\n    {\n      \"unit_number\": \"<string>\",\n      \"unit_group_id\": \"<string>\",\n      \"unit_type_id\": \"<string>\",\n      \"width\": \"<number>\",\n      \"length\": \"<number>\",\n      \"standard_rate\": \"<number>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fbf27113-3122-4dbe-997b-00016689d89e",
+          "name": "Bulk update units",
+          "request": {
+            "name": "Bulk update units",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "units",
+                "bulk_update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"units\": [\n    {\n      \"unit_number\": \"<string>\",\n      \"unit_group_id\": \"<string>\",\n      \"unit_type_id\": \"<string>\",\n      \"width\": \"<number>\",\n      \"length\": \"<number>\",\n      \"standard_rate\": \"<number>\"\n    },\n    {\n      \"unit_number\": \"<string>\",\n      \"unit_group_id\": \"<string>\",\n      \"unit_type_id\": \"<string>\",\n      \"width\": \"<number>\",\n      \"length\": \"<number>\",\n      \"standard_rate\": \"<number>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b443743b-aadf-42d1-901f-ee9dcacef71c",
+              "name": "Units updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "units",
+                    "bulk_update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"units\": [\n    {\n      \"unit_number\": \"<string>\",\n      \"unit_group_id\": \"<string>\",\n      \"unit_type_id\": \"<string>\",\n      \"width\": \"<number>\",\n      \"length\": \"<number>\",\n      \"standard_rate\": \"<number>\"\n    },\n    {\n      \"unit_number\": \"<string>\",\n      \"unit_group_id\": \"<string>\",\n      \"unit_type_id\": \"<string>\",\n      \"width\": \"<number>\",\n      \"length\": \"<number>\",\n      \"standard_rate\": \"<number>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36996693-33ca-46d0-9102-59319a6d29db",
+          "name": "Get historical unit rates",
+          "request": {
+            "name": "Get historical unit rates",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "units",
+                "rate_history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a30ccb79-95ea-4492-b9e7-0463e9058313",
+              "name": "Rate history entries.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "units",
+                    "rate_history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4e54074-f7d9-47c5-8639-b98c43f0c8e9",
+          "name": "Get future scheduled rate changes for a unit",
+          "request": {
+            "name": "Get future scheduled rate changes for a unit",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "units",
+                ":unit_id",
+                "future_scheduled_rates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "unit_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e3f65a03-cb9a-44f3-b710-8f9dc0415ad1",
+              "name": "Scheduled rate changes.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "units",
+                    ":unit_id",
+                    "future_scheduled_rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "unit_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88ecf370-67f4-4c96-871e-8c22801f50e1",
+          "name": "List unit groups",
+          "request": {
+            "name": "List unit groups",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "unit_groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e6be062-b492-44d0-9f46-c5bb020a87d6",
+              "name": "Unit groups.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "unit_groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"max_rate\": 5959.7088355935975\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\",\n    \"max_rate\": 9368.355354109282\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "123e2c1d-4ba7-4bcd-ade3-35d2d8e0be7e",
+          "name": "Create a unit group",
+          "request": {
+            "name": "Create a unit group",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "unit_groups"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"max_rate\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "67ede424-d89a-4b47-9939-14e01bf1ca80",
+              "name": "Unit group created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "unit_groups"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"max_rate\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b20279e-f018-4433-ab1b-ea066be37014",
+          "name": "List tiered rates for unit groups",
+          "request": {
+            "name": "List tiered rates for unit groups",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "unit_group_tier_rates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7b2bdbe9-b355-4e79-98b5-645c920c71a5",
+              "name": "Unit group tier rates.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "unit_group_tier_rates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8873cb4f-79c4-49bd-af40-aed14decf548",
+          "name": "Update tiered rates for unit groups",
+          "request": {
+            "name": "Update tiered rates for unit groups",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "unit_group_tier_rates",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ff6a1735-1320-45f2-a911-86f2ea176cab",
+              "name": "Tier rates updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "unit_group_tier_rates",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a35cc54b-283d-4fb6-824a-ee1b15de8d51",
+          "name": "List discount plans",
+          "request": {
+            "name": "List discount plans",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "discount_plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f43ce558-e746-4ba1-8f31-471950450732",
+              "name": "Discount plans.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "discount_plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.storedgefms.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth1",
+    "oauth1": [
+      {
+        "key": "consumerSecret",
+        "value": "{{consumerSecret}}"
+      },
+      {
+        "key": "consumerKey",
+        "value": "{{consumerKey}}"
+      },
+      {
+        "key": "addParamsToHeader",
+        "value": true
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1154ea67-6af7-4950-be76-b27967bb14c8",
+    "name": "Storable Edge (storEDGE) Delinquency & Auctions Units & Rates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A representative OpenAPI reference for the Storable Edge (storEDGE) REST API, the modern property-management API in the Storable brand family (SiteLink, storEDGE, SpareFoot). The endpoint paths, HTTP methods, and parameter names below are taken from Storable's public v1 API reference at https://api.storedgefms.com/docs/v1.html. That page enumerates roughly 150 endpoints across tenants, units, ledgers, leads, move-ins/outs, gate access, insurance, tasks, documents/eSign, delinquency/auctions, and reporting; this document models a representative subset of those confirmed paths per resource area rather than every documented route. Response/request body schemas below are reasonably modeled from the named resources (tenant, unit, ledger, lead, etc.) since the source page documents endpoints and parameters but was not captured with full field-by-field JSON schemas - treat schema properties as illustrative, not a verbatim contract. All calls are scoped to a facility (or company) by path parameter and authenticated with one-legged OAuth 1.0 (API access key + secret issued to a storEDGE customer, used as the OAuth consumer key/secret with no additional handshake).\n\nContact Support:\n Name: Storable",
+      "type": "text/plain"
+    }
+  }
+}

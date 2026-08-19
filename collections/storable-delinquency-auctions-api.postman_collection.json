@@ -1,0 +1,546 @@
+{
+  "item": [
+    {
+      "id": "2b3df3aa-abf4-4174-b57f-1aeaa79122f0",
+      "name": "Delinquency & Auctions",
+      "description": {
+        "content": "Delinquency event tracking and lien-unit auctions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cb6be0d7-175e-4d7d-8c23-f401f810c052",
+          "name": "List delinquency events",
+          "request": {
+            "name": "List delinquency events",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "delinquency_events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "da05791e-fd6b-4e8d-9780-a034263b6e09",
+              "name": "Delinquency events.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "delinquency_events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"ledger_id\": \"string\",\n    \"tenant_id\": \"string\",\n    \"stage\": \"string\",\n    \"days_delinquent\": 6906,\n    \"balance\": 1819.911827308165\n  },\n  {\n    \"id\": \"string\",\n    \"ledger_id\": \"string\",\n    \"tenant_id\": \"string\",\n    \"stage\": \"string\",\n    \"days_delinquent\": 4503,\n    \"balance\": 4821.664118150111\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b00e0d2-4bcf-44e3-bde2-b792bee32378",
+          "name": "Get a delinquency event by ID",
+          "request": {
+            "name": "Get a delinquency event by ID",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "delinquency_events",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9a625f9a-e1e1-451c-a892-a374a17aa945",
+              "name": "The delinquency event.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "delinquency_events",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bbe65609-1bc4-4a43-81bc-749e14aac7ac",
+          "name": "Apply a state-transition verb to a delinquency event",
+          "request": {
+            "name": "Apply a state-transition verb to a delinquency event",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "delinquency_events",
+                ":id",
+                ":verb"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "verb",
+                  "description": "(Required) Action verb, e.g. waive, escalate, resolve."
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "72ef23e7-e541-4eef-95fd-b16c39e37789",
+              "name": "Event transitioned.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "delinquency_events",
+                    ":id",
+                    ":verb"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "verb",
+                      "description": "(Required) Action verb, e.g. waive, escalate, resolve."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7a78eab9-105e-4ef2-86b8-7eb922152b03",
+          "name": "List scheduled lien-unit auctions for a facility",
+          "request": {
+            "name": "List scheduled lien-unit auctions for a facility",
+            "description": {},
+            "url": {
+              "path": [
+                ":facility_id",
+                "auctions",
+                "scheduled"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "facility_id",
+                  "description": "(Required) The storEDGE facility ID the request is scoped to."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f66255fe-ee4e-4460-8446-ce3dc8c7a8dc",
+              "name": "Scheduled auctions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ":facility_id",
+                    "auctions",
+                    "scheduled"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "facility_id",
+                      "description": "(Required) The storEDGE facility ID the request is scoped to."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"unit_id\": \"string\",\n    \"facility_id\": \"string\",\n    \"scheduled_date\": \"2025-04-01\",\n    \"status\": \"canceled\"\n  },\n  {\n    \"id\": \"string\",\n    \"unit_id\": \"string\",\n    \"facility_id\": \"string\",\n    \"scheduled_date\": \"1964-04-15\",\n    \"status\": \"canceled\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "052f0ad4-32af-4c53-bb4b-8a92e49b091a",
+          "name": "List active auctions across every facility in a company",
+          "request": {
+            "name": "List active auctions across every facility in a company",
+            "description": {},
+            "url": {
+              "path": [
+                "companies",
+                ":company_id",
+                "active_auctions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "company_id",
+                  "description": "(Required) The storEDGE company (multi-facility account) ID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9cfea397-4134-4854-ace8-9f5426726dc4",
+              "name": "Active auctions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":company_id",
+                    "active_auctions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "company_id",
+                      "description": "(Required) The storEDGE company (multi-facility account) ID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth1",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "OAuth <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"unit_id\": \"string\",\n    \"facility_id\": \"string\",\n    \"scheduled_date\": \"2025-04-01\",\n    \"status\": \"canceled\"\n  },\n  {\n    \"id\": \"string\",\n    \"unit_id\": \"string\",\n    \"facility_id\": \"string\",\n    \"scheduled_date\": \"1964-04-15\",\n    \"status\": \"canceled\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.storedgefms.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth1",
+    "oauth1": [
+      {
+        "key": "consumerSecret",
+        "value": "{{consumerSecret}}"
+      },
+      {
+        "key": "consumerKey",
+        "value": "{{consumerKey}}"
+      },
+      {
+        "key": "addParamsToHeader",
+        "value": true
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7c5b906b-f5a3-40b3-a361-fdc4512981ca",
+    "name": "Storable Edge (storEDGE) Delinquency & Auctions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "A representative OpenAPI reference for the Storable Edge (storEDGE) REST API, the modern property-management API in the Storable brand family (SiteLink, storEDGE, SpareFoot). The endpoint paths, HTTP methods, and parameter names below are taken from Storable's public v1 API reference at https://api.storedgefms.com/docs/v1.html. That page enumerates roughly 150 endpoints across tenants, units, ledgers, leads, move-ins/outs, gate access, insurance, tasks, documents/eSign, delinquency/auctions, and reporting; this document models a representative subset of those confirmed paths per resource area rather than every documented route. Response/request body schemas below are reasonably modeled from the named resources (tenant, unit, ledger, lead, etc.) since the source page documents endpoints and parameters but was not captured with full field-by-field JSON schemas - treat schema properties as illustrative, not a verbatim contract. All calls are scoped to a facility (or company) by path parameter and authenticated with one-legged OAuth 1.0 (API access key + secret issued to a storEDGE customer, used as the OAuth consumer key/secret with no additional handshake).\n\nContact Support:\n Name: Storable",
+      "type": "text/plain"
+    }
+  }
+}

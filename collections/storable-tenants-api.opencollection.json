@@ -1,0 +1,228 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Storable Edge (storEDGE) Delinquency & Auctions Tenants API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tenants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/tenants",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated collection endpoints."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Items per page for paginated collection endpoints (default 100)."
+              }
+            ]
+          },
+          "docs": "List tenants"
+        },
+        {
+          "info": {
+            "name": "Get a tenant by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/tenants/:id",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a tenant by ID"
+        },
+        {
+          "info": {
+            "name": "Update a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.storedgefms.com/v1/:facility_id/tenants/:id",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a tenant"
+        },
+        {
+          "info": {
+            "name": "Search tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/tenants/search",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Search tenants"
+        },
+        {
+          "info": {
+            "name": "Get tenant communication preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/tenants/:tenant_id/preferences",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "tenant_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get tenant communication preferences"
+        },
+        {
+          "info": {
+            "name": "Update tenant communication preferences",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.storedgefms.com/v1/:facility_id/tenants/:tenant_id/preferences",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "tenant_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update tenant communication preferences"
+        },
+        {
+          "info": {
+            "name": "Add a note to a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.storedgefms.com/v1/:facility_id/tenants/:tenant_id/notes",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "tenant_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a note to a tenant"
+        },
+        {
+          "info": {
+            "name": "Authenticate a tenant against the tenant portal",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.storedgefms.com/v1/:facility_id/tenants/sign_in",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authenticate a tenant against the tenant portal"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

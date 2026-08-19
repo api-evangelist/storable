@@ -1,0 +1,266 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Storable Edge (storEDGE) Delinquency & Auctions Ledgers & Payments API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ledgers & Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tenant ledgers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/ledgers",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated collection endpoints."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Items per page for paginated collection endpoints (default 100)."
+              }
+            ]
+          },
+          "docs": "List tenant ledgers"
+        },
+        {
+          "info": {
+            "name": "Get a ledger by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/ledgers/:id",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a ledger by ID"
+        },
+        {
+          "info": {
+            "name": "Make a payment against a ledger",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.storedgefms.com/v1/:facility_id/ledgers/:ledger_id/make_payment",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "ledger_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Make a payment against a ledger"
+        },
+        {
+          "info": {
+            "name": "Enable, disable, or update autopay on a ledger",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.storedgefms.com/v1/:facility_id/ledgers/:ledger_id/update_autopay",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "ledger_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Enable, disable, or update autopay on a ledger"
+        },
+        {
+          "info": {
+            "name": "List a tenant's stored payment methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/tenants/:tenant_id/payment_methods",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "tenant_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List a tenant's stored payment methods"
+        },
+        {
+          "info": {
+            "name": "Add a payment method for a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.storedgefms.com/v1/:facility_id/tenants/:tenant_id/payment_methods",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "tenant_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a payment method for a tenant"
+        },
+        {
+          "info": {
+            "name": "List payment intents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/payment_intents",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "List payment intents"
+        },
+        {
+          "info": {
+            "name": "Get an invoice by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/invoices/:id",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an invoice by ID"
+        },
+        {
+          "info": {
+            "name": "List invoiceable items (fees, retail, insurance, services)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/invoiceable_items",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "List invoiceable items (fees, retail, insurance, services)"
+        },
+        {
+          "info": {
+            "name": "Authorize funds on a payment method (e.g. digital wallet)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.storedgefms.com/v1/:facility_id/authorize_funds",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Authorize funds on a payment method (e.g. digital wallet)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

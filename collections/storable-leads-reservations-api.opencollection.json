@@ -1,0 +1,181 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Storable Edge (storEDGE) Delinquency & Auctions Leads & Reservations API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Leads & Reservations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List leads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/leads",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for paginated collection endpoints."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "Items per page for paginated collection endpoints (default 100)."
+              }
+            ]
+          },
+          "docs": "List leads"
+        },
+        {
+          "info": {
+            "name": "Create a lead (inquiry, reservation, or waitlist entry)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.storedgefms.com/v1/:facility_id/leads",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a lead (inquiry, reservation, or waitlist entry)"
+        },
+        {
+          "info": {
+            "name": "Update a lead",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.storedgefms.com/v1/:facility_id/leads/:id",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a lead"
+        },
+        {
+          "info": {
+            "name": "Delete a lead",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.storedgefms.com/v1/:facility_id/leads/:id",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a lead"
+        },
+        {
+          "info": {
+            "name": "List leads in reservation status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/leads/reservations",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "List leads in reservation status"
+        },
+        {
+          "info": {
+            "name": "List waitlisted leads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/:facility_id/leads/waitlist",
+            "params": [
+              {
+                "name": "facility_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE facility ID the request is scoped to."
+              }
+            ]
+          },
+          "docs": "List waitlisted leads"
+        },
+        {
+          "info": {
+            "name": "List leads across every facility in a company",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.storedgefms.com/v1/companies/:company_id/leads",
+            "params": [
+              {
+                "name": "company_id",
+                "value": "",
+                "type": "path",
+                "description": "The storEDGE company (multi-facility account) ID."
+              }
+            ]
+          },
+          "docs": "List leads across every facility in a company"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
