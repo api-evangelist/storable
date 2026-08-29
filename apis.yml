@@ -11,6 +11,18 @@ description: Storable is the leading technology provider for the self-storage in
   read the docs), while call access itself requires being a storEDGE customer
   and generating one-legged OAuth 1.0 credentials (API access key/secret) tied to
   a facility ID.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: paid
   onboarding: self-serve
