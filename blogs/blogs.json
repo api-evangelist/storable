@@ -2,25 +2,21 @@
   "repo": "storable",
   "feeds": [
     {
+      "source": "https://www.storable.com/blog/",
+      "feed_url": "https://www.storable.com/blog/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    },
+    {
       "source": "https://www.storable.com/feed/",
       "feed_url": "https://www.storable.com/feed/",
       "title": "",
       "saved": 0,
-      "method": "feed",
-      "nature": "undetermined",
-      "nature_basis": null
-    },
-    {
-      "source": "https://www.storable.com/blog/",
-      "feed_url": "https://www.storable.com/feed/",
-      "title": "",
-      "saved": 0,
-      "method": "discovered",
-      "nature": "undetermined",
-      "nature_basis": null
+      "method": "feed"
     }
   ],
-  "fetched": "2026-08-30T22:33:40Z",
+  "fetched": "2026-09-06T19:17:18Z",
   "post_count": 21,
   "feed_nature": "undetermined",
   "feed_nature_basis": null,
