@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Storable Edge (storEDGE) Delinquency & Auctions Leads & Reservations API
-  description: A representative OpenAPI reference for the Storable Edge (storEDGE) REST API, the modern property-management API in the Storable brand family (SiteLink, storEDGE, SpareFoot). The endpoint paths, HTTP methods, and parameter names below are taken from Storable's public v1 API reference at https://api.storedgefms.com/docs/v1.html. That page enumerates roughly 150 endpoints across tenants, units, ledgers, leads, move-ins/outs, gate access, insurance, tasks, documents/eSign, delinquency/auctions, and reporting; this document models a representative subset of those confirmed paths per resource area rather than every documented route. Response/request body schemas below are reasonably modeled from the named resources (tenant, unit, ledger, lead, etc.) since the source page documents endpoints and parameters but was not captured with full field-by-field JSON schemas - treat schema properties as illustrative, not a verbatim contract. All calls are scoped to a facility (or company) by path parameter and authenticated with one-legged OAuth 1.0 (API access key + secret issued to a storEDGE customer, used as the OAuth consumer key/secret with no additional handshake).
+  title: Storable Edge (storEDGE) Leads & Reservations API
+  description: A representative OpenAPI reference for the Storable Edge (storEDGE) REST API, the modern property-management API in the Storable brand family (SiteLink, storEDGE, SpareFoot).
   version: '1.0'
   contact:
     name: Storable
@@ -134,13 +134,6 @@ components:
       schema:
         type: integer
         default: 100
-    companyId:
-      name: company_id
-      in: path
-      required: true
-      description: The storEDGE company (multi-facility account) ID.
-      schema:
-        type: string
     page:
       name: page
       in: query
@@ -148,6 +141,13 @@ components:
       schema:
         type: integer
         default: 1
+    companyId:
+      name: company_id
+      in: path
+      required: true
+      description: The storEDGE company (multi-facility account) ID.
+      schema:
+        type: string
     facilityId:
       name: facility_id
       in: path
@@ -173,6 +173,26 @@ components:
           type: string
         source:
           type: string
+    Meta:
+      type: object
+      description: Every storEDGE response body includes a meta hash with request parameters, method, pagination, and status/error details.
+      properties:
+        status_code:
+          type: integer
+        status_message:
+          type: string
+        error_code:
+          type:
+          - integer
+          - 'null'
+        request_id:
+          type: string
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_count:
+          type: integer
     Lead:
       type: object
       properties:
@@ -198,25 +218,6 @@ components:
           type: string
         source:
           type: string
-    Meta:
-      type: object
-      description: Every storEDGE response body includes a meta hash with request parameters, method, pagination, and status/error details.
-      properties:
-        status_code:
-          type: integer
-        status_message:
-          type: string
-        error_code:
-          type: integer
-          nullable: true
-        request_id:
-          type: string
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total_count:
-          type: integer
   securitySchemes:
     oauth1:
       type: http

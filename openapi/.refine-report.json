@@ -1,17 +1,7 @@
 {
   "provider": "storable",
   "sources": [
-    "storable-delinquency-auctions-api-openapi.yml",
-    "storable-documents-esign-api-openapi.yml",
-    "storable-gate-access-api-openapi.yml",
-    "storable-insurance-api-openapi.yml",
-    "storable-leads-reservations-api-openapi.yml",
-    "storable-ledgers-payments-api-openapi.yml",
-    "storable-move-ins-outs-api-openapi.yml",
-    "storable-reporting-api-openapi.yml",
-    "storable-tasks-api-openapi.yml",
-    "storable-tenants-api-openapi.yml",
-    "storable-units-rates-api-openapi.yml"
+    "_original/storable-openapi.yml"
   ],
   "outputs": [
     "storable-delinquency-auctions-api-openapi.yml",
@@ -29,6 +19,22 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "storable-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "storable-delinquency-auctions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "storable-documents-esign-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "storable-gate-access-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "storable-insurance-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "storable-leads-reservations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "storable-ledgers-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "storable-move-ins-outs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "storable-reporting-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "storable-tasks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "storable-tenants-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "storable-units-rates-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
