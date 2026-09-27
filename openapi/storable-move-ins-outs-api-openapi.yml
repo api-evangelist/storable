@@ -117,6 +117,14 @@ paths:
         '200':
           description: Move-out processed.
 components:
+  parameters:
+    facilityId:
+      name: facility_id
+      in: path
+      required: true
+      description: The storEDGE facility ID the request is scoped to.
+      schema:
+        type: string
   schemas:
     MoveInInput:
       type: object
@@ -130,14 +138,6 @@ components:
           format: date
         payment_method_id:
           type: string
-  parameters:
-    facilityId:
-      name: facility_id
-      in: path
-      required: true
-      description: The storEDGE facility ID the request is scoped to.
-      schema:
-        type: string
   securitySchemes:
     oauth1:
       type: http

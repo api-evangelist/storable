@@ -127,13 +127,6 @@ paths:
           description: Company-wide leads.
 components:
   parameters:
-    perPage:
-      name: per_page
-      in: query
-      description: Items per page for paginated collection endpoints (default 100).
-      schema:
-        type: integer
-        default: 100
     page:
       name: page
       in: query
@@ -141,6 +134,13 @@ components:
       schema:
         type: integer
         default: 1
+    perPage:
+      name: per_page
+      in: query
+      description: Items per page for paginated collection endpoints (default 100).
+      schema:
+        type: integer
+        default: 100
     companyId:
       name: company_id
       in: path
@@ -173,26 +173,6 @@ components:
           type: string
         source:
           type: string
-    Meta:
-      type: object
-      description: Every storEDGE response body includes a meta hash with request parameters, method, pagination, and status/error details.
-      properties:
-        status_code:
-          type: integer
-        status_message:
-          type: string
-        error_code:
-          type:
-          - integer
-          - 'null'
-        request_id:
-          type: string
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total_count:
-          type: integer
     Lead:
       type: object
       properties:
@@ -218,6 +198,26 @@ components:
           type: string
         source:
           type: string
+    Meta:
+      type: object
+      description: Every storEDGE response body includes a meta hash with request parameters, method, pagination, and status/error details.
+      properties:
+        status_code:
+          type: integer
+        status_message:
+          type: string
+        error_code:
+          type:
+          - integer
+          - 'null'
+        request_id:
+          type: string
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_count:
+          type: integer
   securitySchemes:
     oauth1:
       type: http

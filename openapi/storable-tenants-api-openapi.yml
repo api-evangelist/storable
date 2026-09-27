@@ -186,7 +186,49 @@ paths:
         '200':
           description: Sign-in result.
 components:
+  responses:
+    Unauthorized:
+      description: Missing or invalid OAuth 1.0 signature/credentials.
+    NotFound:
+      description: Resource not found.
+  parameters:
+    page:
+      name: page
+      in: query
+      description: Page number for paginated collection endpoints.
+      schema:
+        type: integer
+        default: 1
+    perPage:
+      name: per_page
+      in: query
+      description: Items per page for paginated collection endpoints (default 100).
+      schema:
+        type: integer
+        default: 100
+    tenantId:
+      name: tenant_id
+      in: path
+      required: true
+      schema:
+        type: string
+    facilityId:
+      name: facility_id
+      in: path
+      required: true
+      description: The storEDGE facility ID the request is scoped to.
+      schema:
+        type: string
   schemas:
+    TenantPreferences:
+      type: object
+      properties:
+        email_opt_in:
+          type: boolean
+        sms_opt_in:
+          type: boolean
+        autopay_reminders:
+          type: boolean
     TenantInput:
       type: object
       properties:
@@ -198,15 +240,6 @@ components:
           type: string
         phone:
           type: string
-    TenantPreferences:
-      type: object
-      properties:
-        email_opt_in:
-          type: boolean
-        sms_opt_in:
-          type: boolean
-        autopay_reminders:
-          type: boolean
     Meta:
       type: object
       description: Every storEDGE response body includes a meta hash with request parameters, method, pagination, and status/error details.
@@ -247,39 +280,6 @@ components:
           - previous
         facility_id:
           type: string
-  parameters:
-    perPage:
-      name: per_page
-      in: query
-      description: Items per page for paginated collection endpoints (default 100).
-      schema:
-        type: integer
-        default: 100
-    page:
-      name: page
-      in: query
-      description: Page number for paginated collection endpoints.
-      schema:
-        type: integer
-        default: 1
-    tenantId:
-      name: tenant_id
-      in: path
-      required: true
-      schema:
-        type: string
-    facilityId:
-      name: facility_id
-      in: path
-      required: true
-      description: The storEDGE facility ID the request is scoped to.
-      schema:
-        type: string
-  responses:
-    NotFound:
-      description: Resource not found.
-    Unauthorized:
-      description: Missing or invalid OAuth 1.0 signature/credentials.
   securitySchemes:
     oauth1:
       type: http
