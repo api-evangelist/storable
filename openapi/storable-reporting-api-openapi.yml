@@ -94,21 +94,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ReportRequest'
 components:
-  parameters:
-    facilityId:
-      name: facility_id
-      in: path
-      required: true
-      description: The storEDGE facility ID the request is scoped to.
-      schema:
-        type: string
-    companyId:
-      name: company_id
-      in: path
-      required: true
-      description: The storEDGE company (multi-facility account) ID.
-      schema:
-        type: string
   schemas:
     ReportRequest:
       type: object
@@ -138,6 +123,21 @@ components:
         end_date:
           type: string
           format: date
+  parameters:
+    facilityId:
+      name: facility_id
+      in: path
+      required: true
+      description: The storEDGE facility ID the request is scoped to.
+      schema:
+        type: string
+    companyId:
+      name: company_id
+      in: path
+      required: true
+      description: The storEDGE company (multi-facility account) ID.
+      schema:
+        type: string
   securitySchemes:
     oauth1:
       type: http
