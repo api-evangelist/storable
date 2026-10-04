@@ -217,46 +217,6 @@ paths:
           description: Discount plans.
 components:
   schemas:
-    Unit:
-      type: object
-      properties:
-        id:
-          type: string
-        unit_number:
-          type: string
-        unit_group_id:
-          type: string
-        unit_type_id:
-          type: string
-        width:
-          type: number
-        length:
-          type: number
-        standard_rate:
-          type: number
-        web_rate:
-          type: number
-        status:
-          type: string
-          enum:
-          - available
-          - rented
-          - unrentable
-    UnitInput:
-      type: object
-      properties:
-        unit_number:
-          type: string
-        unit_group_id:
-          type: string
-        unit_type_id:
-          type: string
-        width:
-          type: number
-        length:
-          type: number
-        standard_rate:
-          type: number
     UnitGroup:
       type: object
       properties:
@@ -286,7 +246,54 @@ components:
           type: integer
         total_count:
           type: integer
+    UnitInput:
+      type: object
+      properties:
+        unit_number:
+          type: string
+        unit_group_id:
+          type: string
+        unit_type_id:
+          type: string
+        width:
+          type: number
+        length:
+          type: number
+        standard_rate:
+          type: number
+    Unit:
+      type: object
+      properties:
+        id:
+          type: string
+        unit_number:
+          type: string
+        unit_group_id:
+          type: string
+        unit_type_id:
+          type: string
+        width:
+          type: number
+        length:
+          type: number
+        standard_rate:
+          type: number
+        web_rate:
+          type: number
+        status:
+          type: string
+          enum:
+          - available
+          - rented
+          - unrentable
   parameters:
+    facilityId:
+      name: facility_id
+      in: path
+      required: true
+      description: The storEDGE facility ID the request is scoped to.
+      schema:
+        type: string
     perPage:
       name: per_page
       in: query
@@ -301,13 +308,6 @@ components:
       schema:
         type: integer
         default: 1
-    facilityId:
-      name: facility_id
-      in: path
-      required: true
-      description: The storEDGE facility ID the request is scoped to.
-      schema:
-        type: string
   securitySchemes:
     oauth1:
       type: http

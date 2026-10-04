@@ -198,43 +198,35 @@ paths:
         '200':
           description: Authorization result.
 components:
+  parameters:
+    tenantId:
+      name: tenant_id
+      in: path
+      required: true
+      schema:
+        type: string
+    perPage:
+      name: per_page
+      in: query
+      description: Items per page for paginated collection endpoints (default 100).
+      schema:
+        type: integer
+        default: 100
+    facilityId:
+      name: facility_id
+      in: path
+      required: true
+      description: The storEDGE facility ID the request is scoped to.
+      schema:
+        type: string
+    page:
+      name: page
+      in: query
+      description: Page number for paginated collection endpoints.
+      schema:
+        type: integer
+        default: 1
   schemas:
-    PaymentMethodInput:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - credit_card
-          - ach
-          - digital_wallet
-        token:
-          type: string
-    PaymentInput:
-      type: object
-      properties:
-        payment_method_id:
-          type: string
-        amount:
-          type: number
-    Ledger:
-      type: object
-      properties:
-        id:
-          type: string
-        tenant_id:
-          type: string
-        unit_id:
-          type: string
-        balance:
-          type: number
-        next_due_date:
-          type: string
-          format: date
-        autopay_enabled:
-          type: boolean
-        delinquent:
-          type: boolean
     Meta:
       type: object
       description: Every storEDGE response body includes a meta hash with request parameters, method, pagination, and status/error details.
@@ -255,34 +247,42 @@ components:
           type: integer
         total_count:
           type: integer
-  parameters:
-    tenantId:
-      name: tenant_id
-      in: path
-      required: true
-      schema:
-        type: string
-    perPage:
-      name: per_page
-      in: query
-      description: Items per page for paginated collection endpoints (default 100).
-      schema:
-        type: integer
-        default: 100
-    page:
-      name: page
-      in: query
-      description: Page number for paginated collection endpoints.
-      schema:
-        type: integer
-        default: 1
-    facilityId:
-      name: facility_id
-      in: path
-      required: true
-      description: The storEDGE facility ID the request is scoped to.
-      schema:
-        type: string
+    Ledger:
+      type: object
+      properties:
+        id:
+          type: string
+        tenant_id:
+          type: string
+        unit_id:
+          type: string
+        balance:
+          type: number
+        next_due_date:
+          type: string
+          format: date
+        autopay_enabled:
+          type: boolean
+        delinquent:
+          type: boolean
+    PaymentInput:
+      type: object
+      properties:
+        payment_method_id:
+          type: string
+        amount:
+          type: number
+    PaymentMethodInput:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - credit_card
+          - ach
+          - digital_wallet
+        token:
+          type: string
   securitySchemes:
     oauth1:
       type: http
