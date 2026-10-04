@@ -187,6 +187,9 @@ apis:
   - type: APIReference
     url: https://api.storedgefms.com/docs/v1.html
 common:
+- type: CapabilityMap
+  url: capabilities/storable-capability-edges.yml
+  name: Storable Business Capability Map
 - type: AgenticAccess
   url: agentic-access/storable-agentic-access.yml
 - type: DomainSecurity
