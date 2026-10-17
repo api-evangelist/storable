@@ -226,41 +226,6 @@ components:
           type: string
         max_rate:
           type: number
-    Meta:
-      type: object
-      description: Every storEDGE response body includes a meta hash with request parameters, method, pagination, and status/error details.
-      properties:
-        status_code:
-          type: integer
-        status_message:
-          type: string
-        error_code:
-          type:
-          - integer
-          - 'null'
-        request_id:
-          type: string
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total_count:
-          type: integer
-    UnitInput:
-      type: object
-      properties:
-        unit_number:
-          type: string
-        unit_group_id:
-          type: string
-        unit_type_id:
-          type: string
-        width:
-          type: number
-        length:
-          type: number
-        standard_rate:
-          type: number
     Unit:
       type: object
       properties:
@@ -286,6 +251,41 @@ components:
           - available
           - rented
           - unrentable
+    UnitInput:
+      type: object
+      properties:
+        unit_number:
+          type: string
+        unit_group_id:
+          type: string
+        unit_type_id:
+          type: string
+        width:
+          type: number
+        length:
+          type: number
+        standard_rate:
+          type: number
+    Meta:
+      type: object
+      description: Every storEDGE response body includes a meta hash with request parameters, method, pagination, and status/error details.
+      properties:
+        status_code:
+          type: integer
+        status_message:
+          type: string
+        error_code:
+          type:
+          - integer
+          - 'null'
+        request_id:
+          type: string
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_count:
+          type: integer
   parameters:
     facilityId:
       name: facility_id

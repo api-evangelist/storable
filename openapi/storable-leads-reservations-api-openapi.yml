@@ -127,26 +127,23 @@ paths:
           description: Company-wide leads.
 components:
   schemas:
-    Meta:
+    LeadInput:
       type: object
-      description: Every storEDGE response body includes a meta hash with request parameters, method, pagination, and status/error details.
       properties:
-        status_code:
-          type: integer
-        status_message:
+        status:
           type: string
-        error_code:
-          type:
-          - integer
-          - 'null'
-        request_id:
+        first_name:
           type: string
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total_count:
-          type: integer
+        last_name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        unit_group_id:
+          type: string
+        source:
+          type: string
     Lead:
       type: object
       properties:
@@ -172,23 +169,26 @@ components:
           type: string
         source:
           type: string
-    LeadInput:
+    Meta:
       type: object
+      description: Every storEDGE response body includes a meta hash with request parameters, method, pagination, and status/error details.
       properties:
-        status:
+        status_code:
+          type: integer
+        status_message:
           type: string
-        first_name:
+        error_code:
+          type:
+          - integer
+          - 'null'
+        request_id:
           type: string
-        last_name:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
-        unit_group_id:
-          type: string
-        source:
-          type: string
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_count:
+          type: integer
   parameters:
     facilityId:
       name: facility_id

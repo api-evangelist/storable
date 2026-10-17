@@ -186,6 +186,67 @@ paths:
         '200':
           description: Sign-in result.
 components:
+  schemas:
+    TenantPreferences:
+      type: object
+      properties:
+        email_opt_in:
+          type: boolean
+        sms_opt_in:
+          type: boolean
+        autopay_reminders:
+          type: boolean
+    TenantInput:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+    Tenant:
+      type: object
+      properties:
+        id:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        status:
+          type: string
+          enum:
+          - current
+          - previous
+        facility_id:
+          type: string
+    Meta:
+      type: object
+      description: Every storEDGE response body includes a meta hash with request parameters, method, pagination, and status/error details.
+      properties:
+        status_code:
+          type: integer
+        status_message:
+          type: string
+        error_code:
+          type:
+          - integer
+          - 'null'
+        request_id:
+          type: string
+        page:
+          type: integer
+        per_page:
+          type: integer
+        total_count:
+          type: integer
   parameters:
     tenantId:
       name: tenant_id
@@ -214,67 +275,6 @@ components:
       schema:
         type: integer
         default: 1
-  schemas:
-    TenantPreferences:
-      type: object
-      properties:
-        email_opt_in:
-          type: boolean
-        sms_opt_in:
-          type: boolean
-        autopay_reminders:
-          type: boolean
-    Meta:
-      type: object
-      description: Every storEDGE response body includes a meta hash with request parameters, method, pagination, and status/error details.
-      properties:
-        status_code:
-          type: integer
-        status_message:
-          type: string
-        error_code:
-          type:
-          - integer
-          - 'null'
-        request_id:
-          type: string
-        page:
-          type: integer
-        per_page:
-          type: integer
-        total_count:
-          type: integer
-    Tenant:
-      type: object
-      properties:
-        id:
-          type: string
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
-        status:
-          type: string
-          enum:
-          - current
-          - previous
-        facility_id:
-          type: string
-    TenantInput:
-      type: object
-      properties:
-        first_name:
-          type: string
-        last_name:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
   responses:
     NotFound:
       description: Resource not found.
