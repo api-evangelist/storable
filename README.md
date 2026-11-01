@@ -1,4 +1,4 @@
-# Storable (storable)
+# Storable
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,124 +66,134 @@
 
 Storable is the leading technology provider for the self-storage industry, serving 33,000+ facilities through a family of brands - SiteLink (legacy Web Edition property management, sold with a partner/NDA-gated SOAP API), storEDGE (modern cloud property management with a documented REST API at api.storedgefms.com), and the SpareFoot storage-unit listing marketplace. This entry models the storEDGE REST API, whose endpoint reference is genuinely publicly documented (no NDA to read the docs), while call access itself requires being a storEDGE customer and generating one-legged OAuth 1.0 credentials (API access key/secret) tied to a facility ID.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/storable/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/storable/refs/heads/main/apis.yml)
+**Areas:** Self Storage · Property Management · Facility Management · Tenants · Reservations · Payments · SiteLink · storEDGE · SpareFoot
 
-## Brand family and access model
+## Storable on APIs.io
 
-Storable owns two competing property-management products it sells in parallel, each with its own API:
+Everything profiled for Storable is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/storable/](https://apis.io/providers/storable/)** — or go straight to one of the APIs or properties below.
 
-- **storEDGE** ([api.storedgefms.com](https://api.storedgefms.com/docs/v1.html)) - a modern REST API. The full endpoint reference (~150 routes across tenants, units, ledgers, leads, move-ins/outs, gate access, insurance, tasks, documents/eSign, delinquency/auctions, and reporting) is publicly readable with no login or NDA. Calling the API requires a storEDGE facility to generate its own API access key and secret, used for one-legged OAuth 1.0 request signing - there is no three-legged OAuth handshake and no public sandbox documented.
-- **SiteLink** ([sitelink.com](https://www.sitelink.com/solutions/integrations-partners)) - an older SOAP-style API. Its reference document is a password-protected PDF at `apidoc.sitelink.com`, released only after signing an NDA, plus a separate API license application at `apilicenseapplication.sitelink.com`. SiteLink documents four access levels: API Aggregator (facility/unit data), API Regular (full transaction access), API Full Reporting, and API Insurance Reporting. No endpoint list is publicly readable, so this entry does not fabricate one.
-- **SpareFoot** is Storable's storage-unit listing marketplace; third-party integration partners (call centers, gate hardware, insurance, listing sites, accounting) connect to whichever of the two management-system APIs a given facility runs, with SpareFoot and StorageTreasures as common downstream consumers.
+### APIs (11)
 
-This entry focuses the `apis:` list on **storEDGE**, since it is the surface with real, publicly confirmed endpoints, and documents SiteLink honestly as a gated legacy sibling in `review.yml` rather than inventing endpoint detail for it.
+- [Storable Delinquency & Auctions API](https://apis.io/apis/storable/storable-delinquency-auctions-api/) — Delinquency event tracking and lien-unit auctions.
+- [Storable Documents & eSign API](https://apis.io/apis/storable/storable-documents-esign-api/) — Lease/rental documents and electronic signature.
+- [Storable Gate Access API](https://apis.io/apis/storable/storable-gate-access-api/) — Gate codes, access points, and gate activity logging.
+- [Storable Insurance API](https://apis.io/apis/storable/storable-insurance-api/) — Tenant protection plan summary, activity, and enrollment settings.
+- [Storable Leads & Reservations API](https://apis.io/apis/storable/storable-leads-reservations-api/) — Lead pipeline - reservations, inquiries, waitlist.
+- [Storable Ledgers & Payments API](https://apis.io/apis/storable/storable-ledgers-payments-api/) — Tenant ledgers, payments, payment methods, invoices.
+- [Storable Move Ins & Outs API](https://apis.io/apis/storable/storable-move-ins-outs-api/) — Rental move-in and move-out lifecycle.
+- [Storable Reporting API](https://apis.io/apis/storable/storable-reporting-api/) — Asynchronous report requests at the facility and company level.
+- [Storable Tasks API](https://apis.io/apis/storable/storable-tasks-api/) — Facility and unit-level operational task management.
+- [Storable Tenants API](https://apis.io/apis/storable/storable-tenants-api/) — Tenant accounts, preferences, notes, and eligibility.
+- [Storable Units & Rates API](https://apis.io/apis/storable/storable-units-rates-api/) — Unit inventory, unit groups/types, and tiered rate management.
 
-## Tags
+### Published properties
 
-- Self Storage
-- Property Management
-- Facility Management
-- Tenants
-- Reservations
-- Payments
-- SiteLink
-- storEDGE
-- SpareFoot
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Timestamps
+#### Agentic access (1)
 
-- **Created:** 2026-07-03
-- **Modified:** 2026-07-03
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## APIs
+- [Storable Agentic Access](https://apis.io/agentic-access/storable/storable-agentic-access/)
 
-### Storable Tenants API
+#### Collections (11)
 
-Create, look up, search, and update tenant records scoped to a facility - sign-in/sign-up, username/password recovery, preferences, notes, delinquency status, eligibility, and each tenant's associated leads and ledgers.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://api.storedgefms.com/docs/v1.html](https://api.storedgefms.com/docs/v1.html)
-- **Base URL:** `https://api.storedgefms.com/v1`
+- [Storable Edge (storEDGE) Delinquency & Auctions API](https://apis.io/collections/storable/open-storable-delinquency-auctions-api/)
+- [Storable Edge (storEDGE) Delinquency & Auctions Documents & eSign API](https://apis.io/collections/storable/open-storable-documents-esign-api/)
+- [Storable Edge (storEDGE) Delinquency & Auctions Gate Access API](https://apis.io/collections/storable/open-storable-gate-access-api/)
+- [Storable Edge (storEDGE) Delinquency & Auctions Insurance API](https://apis.io/collections/storable/open-storable-insurance-api/)
+- [Storable Edge (storEDGE) Delinquency & Auctions Leads & Reservations API](https://apis.io/collections/storable/open-storable-leads-reservations-api/)
+- [Storable Edge (storEDGE) Delinquency & Auctions Ledgers & Payments API](https://apis.io/collections/storable/open-storable-ledgers-payments-api/)
+- [Storable Edge (storEDGE) Delinquency & Auctions Move Ins & Outs API](https://apis.io/collections/storable/open-storable-move-ins-outs-api/)
+- [Storable Edge (storEDGE) Delinquency & Auctions Reporting API](https://apis.io/collections/storable/open-storable-reporting-api/)
+- [Storable Edge (storEDGE) Delinquency & Auctions Tasks API](https://apis.io/collections/storable/open-storable-tasks-api/)
+- [Storable Edge (storEDGE) Delinquency & Auctions Tenants API](https://apis.io/collections/storable/open-storable-tenants-api/)
+- [Storable Edge (storEDGE) Delinquency & Auctions Units & Rates API](https://apis.io/collections/storable/open-storable-units-rates-api/)
 
-### Storable Units & Rate Management API
+#### Security (2)
 
-Manage unit inventory (list, availability, walk-thru, bulk create/update, rate history, future scheduled rates), unit groups and unit types, tiered unit-group rates, rate-applied actions, and discount plans.
+Authentication, trust centre, and vulnerability disclosure.
 
-- **Human URL:** [https://api.storedgefms.com/docs/v1.html](https://api.storedgefms.com/docs/v1.html)
-- **Base URL:** `https://api.storedgefms.com/v1`
+- [Storable Authentication](https://apis.io/security/storable/storable-authentication/)
+- [Storable Domain Security](https://apis.io/security/storable/storable-domain-security/)
 
-### Storable Ledgers & Payments API
+#### Plans and pricing (1)
 
-Read tenant ledgers and delinquency/eligibility state, make and batch payments, manage autopay and gate-access codes on a ledger, register payment methods and payment intents, authorize funds, and retrieve invoices and invoiceable items.
+Published plans, tiers and prices.
 
-- **Human URL:** [https://api.storedgefms.com/docs/v1.html](https://api.storedgefms.com/docs/v1.html)
-- **Base URL:** `https://api.storedgefms.com/v1`
+- [Storable Plans Pricing](https://apis.io/plans/storable/storable-plans-pricing/)
 
-### Storable Leads & Reservations API
+#### Rate limits (1)
 
-Create and manage leads across the pipeline - current, reservations, inquiries, missed move-ins, and waitlist - at the facility, company, and per-tenant level.
+Published request limits.
 
-- **Human URL:** [https://api.storedgefms.com/docs/v1.html](https://api.storedgefms.com/docs/v1.html)
-- **Base URL:** `https://api.storedgefms.com/v1`
+- [Storable Rate Limits](https://apis.io/rate-limits/storable/storable-rate-limits/)
 
-### Storable Move Ins & Move Outs API
+#### FinOps (1)
 
-Review costs and process move-ins, and review costs, schedule, cancel, and process move-outs, plus retrieve move-out reasons and applicable rates.
+What the API costs to run, by operation.
 
-- **Human URL:** [https://api.storedgefms.com/docs/v1.html](https://api.storedgefms.com/docs/v1.html)
-- **Base URL:** `https://api.storedgefms.com/v1`
+- [Storable Finops](https://apis.io/finops/storable/storable-finops/)
 
-### Storable Gate Access API
+## Where to find this API
 
-Check gate-code availability, open gates, log gate activity events, and list a facility's access points, integrating storEDGE with third-party gate/security hardware.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://api.storedgefms.com/docs/v1.html](https://api.storedgefms.com/docs/v1.html)
-- **Base URL:** `https://api.storedgefms.com/v1`
-
-### Storable Insurance API
-
-Retrieve facility-level insurance summary and activity, configure tenant auto-enrollment settings, and record private (non-Storable) insurance coverage on a ledger.
-
-- **Human URL:** [https://api.storedgefms.com/docs/v1.html](https://api.storedgefms.com/docs/v1.html)
-- **Base URL:** `https://api.storedgefms.com/v1`
-
-### Storable Tasks API
-
-Create, complete, and bulk-manage operational tasks at both the facility level and the individual unit level.
-
-- **Human URL:** [https://api.storedgefms.com/docs/v1.html](https://api.storedgefms.com/docs/v1.html)
-- **Base URL:** `https://api.storedgefms.com/v1`
-
-### Storable Documents & eSign API
-
-Retrieve lease and rental documents, send esignable documents to a tenant, and complete SiteLink eSign on a rental event.
-
-- **Human URL:** [https://api.storedgefms.com/docs/v1.html](https://api.storedgefms.com/docs/v1.html)
-- **Base URL:** `https://api.storedgefms.com/v1`
-
-### Storable Delinquency & Auctions API
-
-List and act on delinquency events (including bulk state transitions) and list scheduled or active lien-unit auctions at the facility and company level.
-
-- **Human URL:** [https://api.storedgefms.com/docs/v1.html](https://api.storedgefms.com/docs/v1.html)
-- **Base URL:** `https://api.storedgefms.com/v1`
-
-### Storable Reporting API
-
-Request and poll asynchronous report bundles at the facility or company level and retrieve completed results as JSON, plus check/register Business Intelligence Express enablement.
-
-- **Human URL:** [https://api.storedgefms.com/docs/v1.html](https://api.storedgefms.com/docs/v1.html)
-- **Base URL:** `https://api.storedgefms.com/v1`
-
-## Common Properties
-
-- [LinkedIn](https://www.linkedin.com/company/storableinc)
 - [Website](https://www.storable.com/)
 - [Documentation](https://api.storedgefms.com/docs/v1.html)
-- [Plans](plans/storable-plans-pricing.yml)
-- [Rate Limits](rate-limits/storable-rate-limits.yml)
-- [Fin Ops](finops/storable-finops.yml)
+- [Blog](https://www.storable.com/blog/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 24.4** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 44.1 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 7.9 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.7** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/storable/](https://apis.io/providers/storable/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Storable: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/storable/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
